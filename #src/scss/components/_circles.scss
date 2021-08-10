@@ -1,0 +1,43 @@
+.main__circles-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.main__circles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.circle-s,
+.circle-m {
+  position: absolute;
+}
+
+.main__circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.circle-s {
+  width: 1400px;
+  height: 1400px;
+}
+
+.circle-m {
+  width: 2142px;
+  height: 2118px;
+}
+
+.circle-s .main__circle {
+  transform: rotate(33deg);
+}
+
+.circle-m .main__circle {
+  transform: rotate(42deg);
+}
