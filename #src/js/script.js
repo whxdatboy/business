@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const swiperMain = new Swiper('.main-slider', {
     // direction: 'vertical',
-    // loop: true,
+    loop: true,
     effect: 'fade',
     slidesPerView: 1,
     autoplay: false,
@@ -28,55 +28,78 @@ document.addEventListener("DOMContentLoaded", function () {
 
     mousewheel: {
       thresholdDelta: 1,
-      // eventsTarget: body,
     },
-
-    // slideClass: '.main-slider__item',
 
     on: {
       init: function () {
-        console.log('init')
+
+        let slides = document.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)'),
+        mainProgressMax = document.querySelector('.pagination-max'),
+        count = 0;
+
+        slides.forEach(slide => {
+          count += 1;
+        });
+
+        mainProgressMax.innerText = `0${count}`;
       },
-    }
 
+      slideChangeTransitionStart: function () {
+        let root = document.documentElement,
+        currentSlide = document.querySelector('.swiper-slide-active'),
+        countCurrent = 1,
+        slides = document.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)'),
+        arrSlides = Array.from(slides),
+        mainProgress = document.querySelector('progress'),
+        mainProgressCount = document.querySelector('.pagination-count');
 
-  });
-
-  swiperMain.on('slideChange', function () {
-    let root = document.documentElement,
-    slides = document.querySelectorAll('.swiper-slide'),
-    currentSlide = document.querySelector('.swiper-slide-active'),
-    nextSlide = currentSlide.nextElementSibling;
-
-        switch(nextSlide.dataset.color) {
+        switch(currentSlide.dataset.color) {
           case 'red':
             root.style.setProperty('--color-theme', "#ff4d4d");
-            console.log(currentSlide.dataset.color)
             break;
 
           case 'blue':
             root.style.setProperty('--color-theme', "#0085ff");
-            console.log(currentSlide.dataset.color)
             break;
 
           case 'green':
             root.style.setProperty('--color-theme', "#4bc357");
-            console.log(currentSlide.dataset.color)
             break;
 
           case 'yellow':
             root.style.setProperty('--color-theme', '#ffbf1c');
-            console.log(currentSlide.dataset.color)
             break;
 
           case 'purple':
             root.style.setProperty('--color-theme', "#aa4ef2");
-            console.log(currentSlide.dataset.color)
             break;
 
           default:
             break;
         }
+
+        countCurrent += arrSlides.indexOf(currentSlide);
+
+        mainProgress.value = countCurrent;
+        mainProgressCount.innerText = `0${countCurrent}`;
+
+        if (countCurrent == 0) {
+          countCurrent = 1;
+        } else {
+          return countCurrent
+        }
+      }
+    }
+
+
+  });
+
+  const btnCallback = document.querySelector('.main__recall-logo').nextSibling;
+
+  console.log(btnCallback)
+
+  btnCallback.addEventListener('mouseenter', function() {
+    btnCallback.setAttribute('dur', 15);
   })
 
 });

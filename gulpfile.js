@@ -55,6 +55,7 @@ function browserSync(params) {
       port: 3000,
       notify: false
   })
+  watchFiles();
 }
 
 function html() {
@@ -219,7 +220,8 @@ function fontsStyle() {
                   fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
               }
               c_fontname = fontname;
-            }        }
+            }
+        }
       })
   }
 }
