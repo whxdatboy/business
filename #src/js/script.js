@@ -19,11 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
     },
 
     pagination: {
-      clickable: true,
       type: 'custom',
       el: '.nav-list',
       bullets: '.nav-item',
       bulletClass: 'nav-item',
+      clickable: true,
+      bulletActiveClass: 'swiper-pagination-bullet-active',
     },
 
     mousewheel: {

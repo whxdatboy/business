@@ -214,7 +214,7 @@
   &::after {
     content: "";
     position: absolute;
-    left: 3px;
+    left: 5px;
     top: -4px;
     width: 2px;
     height: 16px;
@@ -291,6 +291,56 @@
 
     &::-webkit-progress-value {
       background-color: var(--color-main);
+      animation: animate-stripes 5s linear infinite;
     }
   }
+}
+
+// modal
+
+.main-slider__modal {
+  &-services {
+    display: none;
+  }
+
+  &-item {
+    border-top: 1px solid #e6e6e6;
+    padding: 5px 0;
+    transition: all 0.3s;
+
+    &:hover {
+      border-top: 1px solid #333;
+
+      .main-slider__modal-title {
+        color: var(--color-theme);
+      }
+    }
+  }
+
+  &-wrapper {
+    width: 100%;
+  }
+
+  &-title {
+    margin: 3px 0;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  &-desc {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 29px;
+    color: var(--color-main);
+  }
+}
+
+@-webkit-keyframes animate-stripes {
+  100% { background-position: -100px 0px; }
+}
+
+@keyframes animate-stripes {
+  100% { background-position: -100px 0px; }
 }

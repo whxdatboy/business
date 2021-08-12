@@ -980,7 +980,7 @@ template {
 .arrow::after {
   content: "";
   position: absolute;
-  left: 3px;
+  left: 5px;
   top: -4px;
   width: 2px;
   height: 16px;
@@ -1077,6 +1077,59 @@ template {
 
 .main-pagination progress::-webkit-progress-value {
   background-color: var(--color-main);
+  -webkit-animation: animate-stripes 5s linear infinite;
+          animation: animate-stripes 5s linear infinite;
+}
+
+.main-slider__modal-services {
+  display: none;
+}
+
+.main-slider__modal-item {
+  border-top: 1px solid #e6e6e6;
+  padding: 5px 0;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.main-slider__modal-item:hover {
+  border-top: 1px solid #333;
+}
+
+.main-slider__modal-item:hover .main-slider__modal-title {
+  color: var(--color-theme);
+}
+
+.main-slider__modal-wrapper {
+  width: 100%;
+}
+
+.main-slider__modal-title {
+  margin: 3px 0;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 32px;
+}
+
+.main-slider__modal-desc {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 29px;
+  color: var(--color-main);
+}
+
+@-webkit-keyframes animate-stripes {
+  100% {
+    background-position: -100px 0px;
+  }
+}
+
+@keyframes animate-stripes {
+  100% {
+    background-position: -100px 0px;
+  }
 }
 
 .main__circles-wrapper {
