@@ -1307,12 +1307,61 @@ template {
   padding: 100px 0 0;
   width: 100%;
   height: auto;
-  max-width: 1270px;
   cursor: default;
+}
+
+.modal-close {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: absolute;
+  right: 3%;
+  top: 3%;
+  border: 2px solid var(--color-main);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background-color: transparent;
+}
+
+.modal-close span {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+}
+
+.modal-close span::before,
+.modal-close span::after {
+  content: "";
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 21px;
+  height: 2px;
+  background-color: var(--color-main);
+}
+
+.modal-close span::before {
+  -webkit-transform: translate(0%, 0%) rotate(45deg);
+      -ms-transform: translate(0%, 0%) rotate(45deg);
+          transform: translate(0%, 0%) rotate(45deg);
+}
+
+.modal-close span::after {
+  -webkit-transform: translate(0%, 0%) rotate(-45deg);
+      -ms-transform: translate(0%, 0%) rotate(-45deg);
+          transform: translate(0%, 0%) rotate(-45deg);
 }
 
 .modal-menu {
   height: auto;
+}
+
+.modal-menu__container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1270px;
 }
 
 .modal-menu__item {
