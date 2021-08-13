@@ -1,3 +1,7 @@
+// import './vendor/swiper';
+// import './vendor/utils';
+// import './vendor/modal';
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const body = document;
@@ -95,12 +99,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   });
 
-  const btnCallback = document.querySelector('.main__recall-logo').nextSibling;
+  let modalsItem = $('.modal-menu__link');
 
-  console.log(btnCallback)
+  modalsItem.each(function () {
+    $(this).click(function() {
+      $(this).next('.modal-menu__desc').slideToggle(400);
+      // $(this).next('.modal-menu__desc').animate({
+      //   height: 'toggle',
+      //   opacity: "+=0.25",
+      // }, 400, function() {
+      //   $('.modal-menu__desc').css('height', 'auto');
+      //   $('.modal-menu__desc').css('display', 'flex');
+      //   $('.modal-menu__desc').css('opacity', '1');
+      // })
+    });
+});
 
-  btnCallback.addEventListener('mouseenter', function() {
-    btnCallback.setAttribute('dur', 15);
-  })
 
+  // function openSpoiler(e) {
+  //   const modalDesc = document.querySelectorAll('.modal-menu__desc'),
+  //         modalItem = document.querySelectorAll('.modal-menu__item'),
+  //         target = e;
+
+  //   if(target.closest(modalItem)) {
+  //     modalDesc.classList.add('active-desc;')
+  //   }
+  // }
+
+  // const modalItem = document.querySelectorAll('.modal-menu__item');
+  // modalItem.addEventListener('mouseenter', openSpoiler(e))
 });

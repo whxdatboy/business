@@ -32,6 +32,7 @@ let path = {
 
 let { src, dest } = require('gulp'),
   gulp = require('gulp'),
+  // babel = require('gulp-babel'),
   browsersync = require("browser-sync").create(),
   fileinclude = require("gulp-file-include"),
   del = require("del"),
@@ -98,6 +99,9 @@ function js() {
   return src(path.src.js)
       .pipe(fileinclude())
       .pipe(dest(path.build.js))
+    //   .pipe(babel({
+    //     presets: ['@babel/env']
+    // }))
       .pipe(
         uglify()
       )
@@ -124,7 +128,7 @@ function images() {
               {cleanupIDs: false}
           ]
         })
-    ]))
+      ]))
       .pipe(dest(path.build.img))
       .pipe(browsersync.stream())
 }
@@ -168,67 +172,67 @@ gulp.task('svgSprite', function () {
       .pipe(dest(path.build.img))
 })
 
-const checkWeight = (fontname) => {
-  let weight = 400;
-  switch (true) {
-      case /Thin/.test(fontname):
-        weight = 100;
-        break;
-      case /ExtraLight/.test(fontname):
-        weight = 200;
-        break;
-      case /Light/.test(fontname):
-        weight = 300;
-        break;
-      case /Regular/.test(fontname):
-        weight = 400;
-        break;
-      case /Medium/.test(fontname):
-        weight = 500;
-        break;
-      case /SemiBold/.test(fontname):
-        weight = 600;
-        break;
-      case /Bold/.test(fontname):
-        weight = 700;
-        break;
-      case /ExtraBold/.test(fontname):
-        weight = 800;
-        break;
-      case /Black/.test(fontname):
-        weight = 900;
-        break;
-  }
-  return weight;
-}
+// const checkWeight = (fontname) => {
+//   let weight = 400;
+//   switch (true) {
+//       case /Thin/.test(fontname):
+//         weight = 100;
+//         break;
+//       case /ExtraLight/.test(fontname):
+//         weight = 200;
+//         break;
+//       case /Light/.test(fontname):
+//         weight = 300;
+//         break;
+//       case /Regular/.test(fontname):
+//         weight = 400;
+//         break;
+//       case /Medium/.test(fontname):
+//         weight = 500;
+//         break;
+//       case /SemiBold/.test(fontname):
+//         weight = 600;
+//         break;
+//       case /Bold/.test(fontname):
+//         weight = 700;
+//         break;
+//       case /ExtraBold/.test(fontname):
+//         weight = 800;
+//         break;
+//       case /Black/.test(fontname):
+//         weight = 900;
+//         break;
+//   }
+//   return weight;
+// }
 
-function fontsStyle() {
-  let file_content = fs.readFileSync(source_folder + '/scss/_fonts.scss');
+// function fontsStyle() {
+//   let file_content = fs.readFileSync(source_folder + '/scss/_fonts.scss');
 
-  if (file_content == '') {
-      fs.writeFile(source_folder + '/scss/_fonts.scss', '', cb);
-      return fs.readdir(path.build.fonts, function (err, items) {
-        if (items) {
-            let c_fontname;
-            for (var i = 0; i < items.length; i++) {
-              let fontname = items[i].split('.');
-              fontname = fontname[0];
-              let font = fontname.split('-')[0];
-              let weight = checkWeight(fontname);
+//   if (file_content == '') {
+//       fs.writeFile(source_folder + '/scss/_fonts.scss', '', cb);
+//       return fs.readdir(path.build.fonts, function (err, items) {
+//         if (items) {
+//             let c_fontname;
+//             for (var i = 0; i < items.length; i++) {
+//               let fontname = items[i].split('.');
+//               fontname = fontname[0];
+//               let font = fontname.split('-')[0];
+//               let weight = checkWeight(fontname);
 
-              if (c_fontname != fontname) {
-                  fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
-              }
-              c_fontname = fontname;
-            }
-        }
-      })
-  }
-}
+//               if (c_fontname != fontname) {
+//                   fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
+//               }
+//               c_fontname = fontname;
+//             }
+//         }
+//       })
+//   }
+// }
 
-function cb() {
+// function cb() {
 
-}
+// }
 
 function watchFiles(params) {
   gulp.watch([path.watch.html], html);
@@ -241,10 +245,10 @@ function clean(params) {
   return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fontsStyle);
+let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), /*fontsStyle*/);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
-exports.fontsStyle = fontsStyle;
+// exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
 exports.js = js;

@@ -10,6 +10,7 @@
 @import "./components/header";
 @import "./components/main";
 @import "./components/circles";
+@import "./components/modals";
 
 @media (max-width: 1024px) {
   @import "../scss/parts/tablet";
