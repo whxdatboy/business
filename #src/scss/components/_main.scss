@@ -74,15 +74,18 @@
     }
 
     &__right {
+      position: relative;
       display: flex;
       align-items: center;
+      justify-content: center;
       height: 100%;
       min-width: 35%;
     }
 
     &__img {
-      // position: absolute;
-      // width: fit-content;
+      position: absolute;
+      bottom: 0;
+      width: fit-content;
     }
   }
 
@@ -265,6 +268,7 @@
     max-width: 19px;
     max-height: 19px;
     text-align: center;
+    fill: #fff;
   }
 }
 

@@ -1,6 +1,4 @@
-// import './vendor/swiper';
-// import './vendor/utils';
-// import './vendor/modal';
+// import {modal} from './vendor/modal';
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -99,33 +97,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
   });
 
-  let modalsItem = $('.modal-menu__link');
+  let modalsItem = $('.modal-menu__item');
 
   modalsItem.each(function () {
     $(this).click(function() {
-      $(this).next('.modal-menu__desc').slideToggle(400);
-      // $(this).next('.modal-menu__desc').animate({
-      //   height: 'toggle',
-      //   opacity: "+=0.25",
-      // }, 400, function() {
-      //   $('.modal-menu__desc').css('height', 'auto');
-      //   $('.modal-menu__desc').css('display', 'flex');
-      //   $('.modal-menu__desc').css('opacity', '1');
-      // })
+      $(this).find('.modal-menu__desc').slideDown(300);
     });
-});
+
+    $(this).mouseleave(function() {
+      $('.modal-menu__desc').slideUp(300);
+    });
+  });
+
+  const btnHeader = $('.header__menu'),
+  btnCloseModal = $('.modal-close'),
+  btnRecall = $('.main__recall');
 
 
-  // function openSpoiler(e) {
-  //   const modalDesc = document.querySelectorAll('.modal-menu__desc'),
-  //         modalItem = document.querySelectorAll('.modal-menu__item'),
-  //         target = e;
+  btnHeader.click(function() {
+    $('.modal').addClass('is-active'),
+    $('.modal--menu').addClass('is-active');
+  })
 
-  //   if(target.closest(modalItem)) {
-  //     modalDesc.classList.add('active-desc;')
-  //   }
-  // }
+  btnCloseModal.click(function() {
+    $('.modal').removeClass('is-active'),
+    $('.modal-container').removeClass('is-active');
+  })
 
-  // const modalItem = document.querySelectorAll('.modal-menu__item');
-  // modalItem.addEventListener('mouseenter', openSpoiler(e))
+  btnRecall.click(function() {
+    $('.modal').addClass('is-active'),
+    $('.modal--recall').addClass('is-active');
+  })
+
 });

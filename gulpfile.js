@@ -1,3 +1,4 @@
+'use strict';
 
 let project_folder = require("path").basename(__dirname);
 let source_folder = "#src";
@@ -32,7 +33,10 @@ let path = {
 
 let { src, dest } = require('gulp'),
   gulp = require('gulp'),
-  // babel = require('gulp-babel'),
+  babel = require('gulp-babel'),
+  webpack = require('webpack'),
+  webpackStream = require('webpack-stream'),
+  webpackConfig = require('./webpack.config.js'),
   browsersync = require("browser-sync").create(),
   fileinclude = require("gulp-file-include"),
   del = require("del"),
@@ -99,9 +103,23 @@ function js() {
   return src(path.src.js)
       .pipe(fileinclude())
       .pipe(dest(path.build.js))
-    //   .pipe(babel({
-    //     presets: ['@babel/env']
-    // }))
+      .pipe(webpackStream({
+        output: {
+          filename: 'script.js'
+        },
+        module: {
+          rules: [{
+            test: /\.m?js$/,
+					  exclude: /(node_modules)/,
+            use: {
+              loader: 'babel-loader',
+						  options: {
+							  presets: ['@babel/preset-env']
+						  }
+            }
+          }]
+        }
+      }))
       .pipe(
         uglify()
       )

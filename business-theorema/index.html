@@ -19,53 +19,54 @@
   <header class="header">
   <div class="container">
 
-    <div class="header__left">
+    <div class="header__wrapper">
+      <div class="header__left">
 
-      <div class="header__logo">
-        <div class="header__logo-img">
-          <svg class="header__logo-icon">
-            <use xlink:href="img/icons/icons.svg#logo"></use>
-          </svg>
+        <div class="header__logo">
+          <div class="header__logo-img">
+            <svg class="header__logo-icon">
+              <use xlink:href="img/icons/icons.svg#logo"></use>
+            </svg>
+          </div>
+          <div class="header__logo-desc">
+            <span>Теорема</span>
+            <span>Бизнеса</span>
+          </div>
         </div>
-        <div class="header__logo-desc">
-          <span>Теорема</span>
-          <span>Бизнеса</span>
-        </div>
+
+        <a href="tel:+74958888000" class="header__phone">+7 (495) 888-80-00</a>
+
+        <a href="mailto:info@teoremabiznesa.ru" class="header__mail">info@teoremabiznesa.ru</a>
+
       </div>
 
-      <a href="tel:+74958888000" class="header__phone">+7 (495) 888-80-00</a>
+      <div class=" header__right">
 
-      <a href="mailto:info@teoremabiznesa.ru" class="header__mail">info@teoremabiznesa.ru</a>
+        <a href="#" class="header__search-btn modal-open" data-modal-open="modal-search">
 
-    </div>
-
-    <div class=" header__right">
-
-      <div class="header__search-block">
-
-        <input type="text" class="header__search is-hidden">
-        <div class="header__search-item">
           <div class="header__search-logo">
             <svg class="header__search-icon">
               <use xlink:href="img/icons/icons.svg#search-1"></use>
             </svg>
           </div>
 
-          <input type="text" name="search" id="searchInput" placeholder="Поиск">
-        </div>
+          <span class="header__search-text">Поиск</span>
+
+        </a>
+
+        <a class="header__menu modal-open" data-modal-open="modal-menu">
+          <div class="header__menu-icon">
+            <span class="header__menu-line small-line"></span>
+            <span class="header__menu-line big-line"></span>
+            <span class="header__menu-line small-line"></span>
+          </div>
+          <span class="header__menu-desc">Меню</span>
+        </a>
 
       </div>
-
-      <div class="header__menu">
-        <div class="header__menu-icon">
-          <span class="header__menu-line small-line"></span>
-          <span class="header__menu-line big-line"></span>
-          <span class="header__menu-line small-line"></span>
-        </div>
-        <span class="header__menu-desc">Меню</span>
-      </div>
-
     </div>
+
+
 
 
   </div>
@@ -516,8 +517,25 @@
 
 
   <div class="modal">
-  <div class="modal-container modal--menu">
-  <button class="modal-close"><span></span></button>
+  <div class="modal-container modal--menu" data-modal="modal-menu">
+  <button class="modal-close modal-onclose"><span></span></button>
+
+  <div class="modal-header">
+    <div class="container">
+      <div class="header__logo">
+        <div class="header__logo-img">
+          <svg class="header__logo-icon">
+            <use xlink:href="img/icons/icons.svg#logo"></use>
+          </svg>
+        </div>
+        <div class="header__logo-desc">
+          <span>Теорема</span>
+          <span>Бизнеса</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <div class="modal-menu">
     <div class="modal-menu__container">
@@ -640,9 +658,134 @@
     </div>
   </div>
 
+  <div class="modal-footer">
+    <div class="container">
+      <div class="main-socials">
+        <div class="main-socials__wrapper">
+
+          <a href="#" class="main-socials__link">
+            <svg class="main-socials__icon">
+              <use xlink:href="img/icons/icons.svg#fb"></use>
+            </svg>
+          </a>
+
+          <a href="#" class="main-socials__link">
+            <svg class="main-socials__icon">
+              <use xlink:href="img/icons/icons.svg#inst"></use>
+            </svg>
+          </a>
+
+          <a href="#" class="main-socials__link">
+            <svg class="main-socials__icon">
+              <use xlink:href="img/icons/icons.svg#tg"></use>
+            </svg>
+          </a>
+
+          <a href="#" class="main-socials__link">
+            <svg class="main-socials__icon">
+              <use xlink:href="img/icons/icons.svg#yt"></use>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
+
+
+  <div class="modal-container modal--recall" data-modal="modal-recall">
+  <button class="modal-close"><span></span></button>
+
+  <div class="modal-header">
+    <div class="container">
+      <div class="header__logo">
+        <div class="header__logo-img">
+          <svg class="header__logo-icon">
+            <use xlink:href="img/icons/icons.svg#logo"></use>
+          </svg>
+        </div>
+        <div class="header__logo-desc">
+          <span>Теорема</span>
+          <span>Бизнеса</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-recall">
+    <div class="modal-wrapper">
+
+      <div class="modal-title__wrapper">
+        <h2 class="modal-title">Напишите нам
+          <div class="modal-title__logo">
+            <svg class="modal-title__icon">
+              <use xlink:href="img/icons/icons.svg#mail"></use>
+            </svg>
+          </div>
+        </h2>
+        <span class="modal-subtitle">и мы найдём решение для вашей ситуации</span>
+
+      </div>
+
+      <div class="modal-content">
+        <form action="#" class="modal-form">
+
+          <div class="modal-form__wrapper">
+
+            <div class="modal-form__inputs">
+
+              <div class="modal-form__input">
+                <span class="modal-form__input-title">Ваше имя*</span>
+                <input type="text" name="recall-name" id="recall-name" placeholder="Алексей Смирнов" required>
+              </div>
+
+              <div class="modal-form__input">
+                <span class="modal-form__input-title">Ваш e-mail*</span>
+                <input type="email" name="recall-email" id="recall-email" placeholder="info_smirnoff@mail.ru" required>
+              </div>
+
+            </div>
+
+            <div class="modal-form__inputs">
+
+              <div class="modal-form__input">
+                <span class="modal-form__input-title">Ваш телефон*</span>
+                <input type="tel" name="recall-phone" id="recall-phone" placeholder="+7 (___) ___-__-__" required>
+              </div>
+
+              <div class="modal-form__input">
+                <span class="modal-form__input-title">Название компании*</span>
+                <input type="text" name="recall-company" id="recall-company" placeholder="Теорема Бизнеса" required>
+              </div>
+
+            </div>
+
+            <div class="modal-form__input-full">
+              <span class="modal-form__input-title">Ваш вопрос</span>
+              <textarea name="recall-question" id="recall-question" cols="30" rows="10"
+                placeholder="Задать вопрос можно в этой строке"></textarea>
+            </div>
+
+            <div class="modal-form__input-full">
+              <input type="checkbox" name="formAgree" id="formAgree">
+              <label for="formAgree">Ознакомлен с политикой в облости обработки персональных данных и даю свое согласие
+                на их обработку</label>
+
+              <button type="submit">Отправить</button>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
 </div>
+
 
 </div>
 

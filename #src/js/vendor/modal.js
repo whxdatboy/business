@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import {lockScroll, unlockScroll} from "./scroll-lock";
 import {createElement} from "./utils";
-import {isLocalhost} from "../constants";
+// import {isLocalhost} from "../constants";
 
 class Modal {
     constructor() {
@@ -142,6 +142,7 @@ export const modalsInit = () => {
     const $document = $(document);
 
     $document.on('click', '[data-modal-open]', function (e) {
+      console.log('нажал на кнопку')
         e.preventDefault();
         const $this = $(this),
             modalId = $this.data('modal-open');

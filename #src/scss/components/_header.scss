@@ -4,9 +4,12 @@
   width: 100%;
 
   .container {
+    padding-top: 42px;
+  }
+
+  &__wrapper {
     display: flex;
     justify-content: space-between;
-    padding-top: 42px;
   }
 
   &__left,
@@ -48,6 +51,7 @@
       flex-direction: column;
       justify-content: center;
       margin-left: 12px;
+      pointer-events: none;
 
       span {
         display: inline-block;
@@ -65,36 +69,21 @@
   }
 
   &__search {
-    &-block {
-      position: relative;
+    &-btn {
+      display: block;
       padding-top: 5px;
+      cursor: pointer;
     }
 
-    &-item {
-      display: flex;
-      padding-left: 15px;
-
-      input {
-        position: relative;
-        border: none;
-
-        &::placeholder {
-          display: inline-block;
-          margin-left: 15px;
-          padding: 8px;
-          font-weight: 700;
-          font-size: 14px;
-          line-height: 19px;
-          text-transform: uppercase;
-        }
-      }
+    &-text {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 14px;
+      text-transform: uppercase;
     }
 
     &-logo {
-      position: absolute;
-      left: -5px;
-      top: 8px;
-      display: block;
+      display: inline-block;
       width: 15px;
       height: 15px;
     }
