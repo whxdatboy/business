@@ -67,16 +67,22 @@
 
             <div class="modal-form__input-full">
               <span class="modal-form__input-title">Ваш вопрос</span>
-              <textarea name="recall-question" id="recall-question" cols="30" rows="10"
+              <textarea name="recall-question" id="recall-question"
                 placeholder="Задать вопрос можно в этой строке"></textarea>
             </div>
 
-            <div class="modal-form__input-full">
-              <input type="checkbox" name="formAgree" id="formAgree">
-              <label for="formAgree">Ознакомлен с политикой в облости обработки персональных данных и даю свое согласие
-                на их обработку</label>
+            <div class="modal-form__input-full modal-form__submit-container">
+              <label class="modal-form__label" for="formAgree">
+                <input class="visually-hidden" type="checkbox" name="formAgree" id="formAgree" required>
+                <span class="modal-form__label-check"></span>
+                <span class="modal-form__label-text">Ознакомлен с политикой в облости обработки персональных данных и
+                  даю свое
+                  согласие
+                  на их обработку</span>
 
-              <button type="submit">Отправить</button>
+              </label>
+
+              <button type="submit" disabled>Отправить</button>
             </div>
 
           </div>

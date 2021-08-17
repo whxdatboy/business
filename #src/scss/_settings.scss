@@ -12,6 +12,7 @@ body {
   margin: 0;
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
+  background-color: var(--color-main-bg);
 }
 
 img {
@@ -35,7 +36,7 @@ ul {
 }
 
 .is-active {
-  display: block;
+  // display: block;
 }
 
 .is-outer {

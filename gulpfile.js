@@ -12,31 +12,31 @@ let path = {
     js: project_folder + "/js/",
     img: project_folder + "/img/",
     fonts: project_folder + "/fonts/",
+    svg: project_folder + "/img/icons/",
   },
   src: {
     html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
     css: source_folder + "/scss/style.scss",
-    js: source_folder + "/js/script.js",
+    js: source_folder + "/js/**/*.js",
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp,JPG,PNG,SVG,GIF,ICO,WEBP}",
     fonts: source_folder + "/fonts/*.ttf",
+    svg: source_folder + "/iconsprite/*.svg",
   },
   watch: {
     html: source_folder + "/**/*.html",
     css: source_folder + "/scss/**/*.scss",
     js: source_folder + "/js/**/*.js",
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp,JPG,PNG,SVG,GIF,ICO,WEBP}",
+    fonts: source_folder + "/fonts/*.ttf",
+    svg: source_folder + "/iconsprite/*.svg",
   },
   clean: "./" + project_folder + "/"
 }
 
 
 
-let { src, dest } = require('gulp'),
+let { src, dest, parallel } = require('gulp'),
   gulp = require('gulp'),
-  babel = require('gulp-babel'),
-  webpack = require('webpack'),
-  webpackStream = require('webpack-stream'),
-  webpackConfig = require('./webpack.config.js'),
   browsersync = require("browser-sync").create(),
   fileinclude = require("gulp-file-include"),
   del = require("del"),
@@ -50,7 +50,11 @@ let { src, dest } = require('gulp'),
   svgSprite = require("gulp-svg-sprite"),
   ttf2woff = require("gulp-ttf2woff"),
   ttf2woff2 = require("gulp-ttf2woff2"),
-  fonter = require("gulp-fonter");
+  fonter = require("gulp-fonter"),
+  webpack = require("webpack"),
+  webpackStream = require("webpack-stream"),
+  sourcemaps = require('gulp-sourcemaps'),
+  notify = require('gulp-notify');
 
 function browserSync(params) {
   browsersync.init({
@@ -80,6 +84,7 @@ function css() {
             outputStyle: 'expanded'
         })
       )
+      .pipe(sourcemaps.init())
       .pipe(
         group_media()      )
       .pipe(
@@ -95,41 +100,40 @@ function css() {
             extname: ".min.css"
         })
       )
+      .pipe(sourcemaps.write('.'))
       .pipe(dest(path.build.css))
       .pipe(browsersync.stream())
 }
 
 function js() {
   return src(path.src.js)
-      .pipe(fileinclude())
-      .pipe(dest(path.build.js))
-      .pipe(webpackStream({
-        output: {
-          filename: 'script.js'
-        },
-        module: {
-          rules: [{
+    .pipe(webpackStream({
+      output: {
+        filename: 'script.js',
+      },
+      module: {
+        rules: [
+          {
             test: /\.m?js$/,
-					  exclude: /(node_modules)/,
+            exclude: /node_modules/,
             use: {
               loader: 'babel-loader',
-						  options: {
-							  presets: ['@babel/preset-env']
-						  }
+              options: {
+                presets: [
+                  ['@babel/preset-env', { targets: "defaults" }]
+                ]
+              }
             }
-          }]
-        }
-      }))
-      .pipe(
-        uglify()
-      )
-      .pipe(
-        rename({
-            extname: ".min.js"
-        })
-      )
-      .pipe(dest(path.build.js))
-      .pipe(browsersync.stream())
+          }
+        ]
+      }
+    }))
+    .pipe(dest(path.build.js))
+    .pipe(sourcemaps.init())
+    .pipe(uglify().on("Error", notify.onError()))
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest(path.build.js))
+    .pipe(browsersync.stream())
 }
 
 function images() {
@@ -168,110 +172,116 @@ gulp.task('otf2ttf', function () {
       .pipe(dest(source_folder + '/fonts/'));
 })
 
-gulp.task('svgSprite', function () {
+function svgSprites(params) {
   return gulp.src([source_folder + '/iconsprite/*.svg'])
-  .pipe(imagemin([
-    imagemin.svgo({
-      plugins: [
-        {removeViewBox: true},
-        {cleanupIDs: false}
-      ]
-  })
-  ]))
-      .pipe(svgSprite({
-        mode: {
-            stack: {
-               sprite: "../icons/icons.svg", //sprite file name
-               //example: true
-            }
-        },
+    .pipe(imagemin([
+      imagemin.svgo({
+        plugins: [
+          { removeViewBox: true },
+          { cleanupIDs: false }
+        ]
+      })
+    ]))
+    .pipe(svgSprite({
+      mode: {
+        stack: {
+          sprite: "../icons.svg"
+        }
       }
-      ))
-      .pipe(dest(path.build.img))
-})
+    }))
+    .pipe(dest(path.build.svg))
+}
 
-// const checkWeight = (fontname) => {
-//   let weight = 400;
-//   switch (true) {
-//       case /Thin/.test(fontname):
-//         weight = 100;
-//         break;
-//       case /ExtraLight/.test(fontname):
-//         weight = 200;
-//         break;
-//       case /Light/.test(fontname):
-//         weight = 300;
-//         break;
-//       case /Regular/.test(fontname):
-//         weight = 400;
-//         break;
-//       case /Medium/.test(fontname):
-//         weight = 500;
-//         break;
-//       case /SemiBold/.test(fontname):
-//         weight = 600;
-//         break;
-//       case /Bold/.test(fontname):
-//         weight = 700;
-//         break;
-//       case /ExtraBold/.test(fontname):
-//         weight = 800;
-//         break;
-//       case /Black/.test(fontname):
-//         weight = 900;
-//         break;
-//   }
-//   return weight;
-// }
+function cb() {
 
-// function fontsStyle() {
-//   let file_content = fs.readFileSync(source_folder + '/scss/_fonts.scss');
+}
 
-//   if (file_content == '') {
-//       fs.writeFile(source_folder + '/scss/_fonts.scss', '', cb);
-//       return fs.readdir(path.build.fonts, function (err, items) {
-//         if (items) {
-//             let c_fontname;
-//             for (var i = 0; i < items.length; i++) {
-//               let fontname = items[i].split('.');
-//               fontname = fontname[0];
-//               let font = fontname.split('-')[0];
-//               let weight = checkWeight(fontname);
+function fontsStyle() {
+  let file_content = fs.readFileSync(source_folder + '/scss/_fonts.scss');
 
-//               if (c_fontname != fontname) {
-//                   fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
-//               }
-//               c_fontname = fontname;
-//             }
-//         }
-//       })
-//   }
-// }
+  if (!file_content == '') {
+    fs.writeFile(source_folder + '/scss/_fonts.scss', '', cb);
+    return fs.readdir(path.build.fonts, function (err, items) {
+      if (items) {
+        let c_fontname;
+        for (var i = 0; i < items.length; i++) {
+          let fontname = items[i].split('.');
+          fontname = fontname[0];
+          let font = fontname.split('-')[0];
+          let weight = checkWeight(fontname);
 
-// function cb() {
+          if (c_fontname != fontname) {
+            fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font-face("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
+          }
+          c_fontname = fontname;
+        }
+      }
+    })
+  }
+}
 
-// }
+const checkWeight = (fontname) => {
+  let weight = 400;
+  switch (true) {
+    case /Thin/.test(fontname):
+      weight = 100;
+      break;
+    case /ExtraLight/.test(fontname):
+      weight = 200;
+      break;
+    case /Light/.test(fontname):
+      weight = 300;
+      break;
+    case /Regular/.test(fontname):
+      weight = 400;
+      break;
+    case /Medium/.test(fontname):
+      weight = 500;
+      break;
+    case /SemiBold/.test(fontname):
+      weight = 600;
+      break;
+    case /Bold/.test(fontname):
+      weight = 700;
+      break;
+    case /ExtraBold/.test(fontname):
+      weight = 800;
+      break;
+    case /Black/.test(fontname):
+      weight = 900;
+      break;
+  }
+  return weight;
+}
 
 function watchFiles(params) {
   gulp.watch([path.watch.html], html);
   gulp.watch([path.watch.css], css);
   gulp.watch([path.watch.js], js);
   gulp.watch([path.watch.img], images);
+  gulp.watch([path.watch.svg], svgSprites);
+  gulp.watch([path.watch.fonts], fonts);
+  gulp.watch([path.watch.fonts], fontsStyle);
 }
 
 function clean(params) {
   return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), /*fontsStyle*/);
+let dev2 = gulp.series(clean, gulp.parallel(html, js, fonts, images, svgSprites), fontsStyle, css);
+let dev = parallel(dev2, watchFiles, browserSync)
+let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts, svgSprites), fontsStyle);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
-// exports.fontsStyle = fontsStyle;
+exports.svgSprites = svgSprites;
+exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
 exports.js = js;
 exports.css = scss;
 exports.html = html;
+exports.dev2 = dev2;
+exports.dev = dev;
 exports.build = build;
 exports.watch = watch;
 exports.default = watch;

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {lockScroll, unlockScroll} from "./scroll-lock";
+// import {lockScroll, unlockScroll} from "./scroll-lock";
 import {createElement} from "./utils";
 // import {isLocalhost} from "../constants";
 
@@ -8,6 +8,7 @@ class Modal {
         this.modalSelector = '[data-modal]';
         this.body = $('body');
         this.doc = $(document);
+        this.modalBody = $('.modal');
         this.closeTimeout = 300;
         this.activeClass = 'is-active';
         this.loadingClass = 'modal-loading';
@@ -20,9 +21,12 @@ class Modal {
     open (id) {
         const $modal = $(`[data-modal=${id}]`);
 
-        lockScroll();
+        console.log($modal)
+
+        // lockScroll();
 
         $modal.addClass(this.activeClass).focus();
+        this.modalBody.addClass(this.activeClass)
         this.body.addClass('modal-open');
         this.doc.trigger('modal-open', [id]);
     }
@@ -71,29 +75,29 @@ class Modal {
 
     }
 
-    close(id) {
-        const $modal = $(`[data-modal=${id}]`),
-            dataOnClose = $modal.data('modal-onclose');
+    // close(id) {
+    //     const $modal = $(`[data-modal=${id}]`),
+    //         dataOnClose = $modal.data('modal-onclose');
 
-        if (id) {
-            $modal.removeClass(this.activeClass);
-        } else {
-            $('[data-modal]').removeClass(this.activeClass);
-        }
+    //     if (id) {
+    //         $modal.removeClass(this.activeClass);
+    //     } else {
+    //         $('[data-modal]').removeClass(this.activeClass);
+    //     }
 
-        if (!this.isOtherOpen()) {
-            setTimeout(() => {
-                unlockScroll();
-                this.body.removeClass('modal-open');
+    //     if (!this.isOtherOpen()) {
+    //         setTimeout(() => {
+    //             unlockScroll();
+    //             this.body.removeClass('modal-open');
 
-                if (dataOnClose === 'remove') {
-                    $modal.remove();
-                }
-            }, this.closeTimeout);
-        }
+    //             if (dataOnClose === 'remove') {
+    //                 $modal.remove();
+    //             }
+    //         }, this.closeTimeout);
+    //     }
 
-        this.doc.trigger('modal-close', [id]);
-    }
+    //     this.doc.trigger('modal-close', [id]);
+    // }
 
     toggle(id) {
         const $modal = $(`[data-modal=${id}]`);
@@ -158,19 +162,19 @@ export const modalsInit = () => {
         modal.openWithAjax(modalId, params);
     });
 
-    $document.on('click', '[data-modal-close]', function (e) {
-        e.preventDefault();
-        const $this = $(this),
-            modalId = $this.data('modal-close');
-        modal.close(modalId);
-    });
+    // $document.on('click', '[data-modal-close]', function (e) {
+    //     e.preventDefault();
+    //     const $this = $(this),
+    //         modalId = $this.data('modal-close');
+    //     modal.close(modalId);
+    // });
 
-    $document.on('click', '[data-modal]', function (e) {
-        if ($(e.target).closest('[data-modal-inner]').length) return;
-        e.preventDefault();
-        const modalId = $(e.currentTarget).data('modal');
-        modal.close(modalId);
-    });
+    // $document.on('click', '[data-modal]', function (e) {
+    //     if ($(e.target).closest('[data-modal-inner]').length) return;
+    //     e.preventDefault();
+    //     const modalId = $(e.currentTarget).data('modal');
+    //     modal.close(modalId);
+    // });
 
     $document.on('click', '[data-modal-toggle]', function (e) {
         e.preventDefault();

@@ -51,11 +51,14 @@
       flex-direction: column;
       justify-content: center;
       margin-left: 12px;
+      color: var(--color-main);
       pointer-events: none;
 
       span {
         display: inline-block;
+        font-family: "Montserrat", sans-serif;
         font-weight: 700;
+        font-size: 18px;
         line-height: 1.25em;
       }
     }
