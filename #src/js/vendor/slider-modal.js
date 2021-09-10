@@ -10,8 +10,8 @@ export function openModalSliders() {
 
     $this.on("click", function(e) {
       e.preventDefault();
-      const $modalSlide = $this.closest('.main-slider__item').find('.main-slider__modal-services'),
-      $leftContent = $this.closest('.main-slider__left').find('.main-slider__left-content');
+      const $modalSlide = $this.closest('.main-slider__left').find('.main-slider__modal-services'),
+      $leftContent = $this.closest('main-slider__left');
 
       $modalSlide.addClass(activeClass);
       $leftContent.addClass(activeClass);

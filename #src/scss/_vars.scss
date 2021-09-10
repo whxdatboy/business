@@ -2,7 +2,27 @@
   --color-main: #3f4245;
   --color-theme: #ff4d4d;
   --color-white: #fff;
-  --color-main-bg: #e5e5e5;
+  --color-main-bg: #f0f0f0;
   --color-input-border: #a6aaae;
   --color-input: #afb3b8;
+}
+
+.theme-red {
+  --color-theme: #ff4d4d;
+}
+
+.theme-blue {
+  --color-theme: #0085ff;
+}
+
+.theme-green {
+  --color-theme: #4bc357;
+}
+
+.theme-yellow {
+  --color-theme: #ffbf1c;
+}
+
+.theme-purple {
+  --color-theme: #aa4ef2;
 }

@@ -13,6 +13,7 @@ let path = {
     img: project_folder + "/img/",
     fonts: project_folder + "/fonts/",
     svg: project_folder + "/img/icons/",
+    media: project_folder + "/media/",
   },
   src: {
     html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
@@ -21,6 +22,7 @@ let path = {
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp,JPG,PNG,SVG,GIF,ICO,WEBP}",
     fonts: source_folder + "/fonts/*.ttf",
     svg: source_folder + "/iconsprite/*.svg",
+    media: source_folder + "/media/*.{mp4,ogv,avi,webm,mov}",
   },
   watch: {
     html: source_folder + "/**/*.html",
@@ -29,11 +31,12 @@ let path = {
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp,JPG,PNG,SVG,GIF,ICO,WEBP}",
     fonts: source_folder + "/fonts/*.ttf",
     svg: source_folder + "/iconsprite/*.svg",
+    media: source_folder + "/media/*.{mp4,ogv,avi,webm,mov}",
   },
   clean: "./" + project_folder + "/"
 }
 
-
+let isProd = false;
 
 let { src, dest, parallel } = require('gulp'),
   gulp = require('gulp'),
@@ -54,15 +57,16 @@ let { src, dest, parallel } = require('gulp'),
   webpack = require("webpack"),
   webpackStream = require("webpack-stream"),
   sourcemaps = require('gulp-sourcemaps'),
-  notify = require('gulp-notify');
+  notify = require('gulp-notify'),
+  gulpif = require('gulp-if');
 
 function browserSync(params) {
   browsersync.init({
       server: {
-        baseDir: "./" + project_folder + "/"
+        baseDir: "./" + project_folder + "/",
       },
       port: 3000,
-      notify: false
+      notify: false,
   })
   watchFiles();
 }
@@ -79,34 +83,35 @@ function html() {
 
 function css() {
   return src(path.src.css)
+      .pipe((gulpif(!isProd, sourcemaps.init())))
       .pipe(
         scss({
             outputStyle: 'expanded'
         })
       )
-      .pipe(sourcemaps.init())
       .pipe(
-        group_media()      )
-      .pipe(
+        group_media())
+      .pipe(gulpif(isProd,
         autoprefixer({
             overrideBrowserslist: ["last 10 versions"],
             cascade: true
         })
-      )
+      ))
+      .pipe(gulpif(!isProd, sourcemaps.write('.')))
       .pipe(dest(path.build.css))
-      .pipe(clean_css())
+      .pipe(gulpif(isProd, clean_css()))
       .pipe(
         rename({
             extname: ".min.css"
         })
       )
-      .pipe(sourcemaps.write('.'))
       .pipe(dest(path.build.css))
-      .pipe(browsersync.stream())
+      .pipe(browsersync.stream({match: '**/*.css'}))
 }
 
 function js() {
   return src(path.src.js)
+  .pipe(gulpif(!isProd, sourcemaps.init()))
     .pipe(webpackStream({
       output: {
         filename: 'script.js',
@@ -129,9 +134,8 @@ function js() {
       }
     }))
     .pipe(dest(path.build.js))
-    .pipe(sourcemaps.init())
-    .pipe(uglify().on("Error", notify.onError()))
-    .pipe(sourcemaps.write('.'))
+    .pipe(gulpif(isProd, uglify().on("error", notify.onError())))
+    .pipe(gulpif(!isProd, sourcemaps.write('.')))
     .pipe(dest(path.build.js))
     .pipe(browsersync.stream())
 }
@@ -140,7 +144,7 @@ function images() {
   return src(path.src.img)
       .pipe(dest(path.build.img))
       .pipe(src(path.src.img))
-      .pipe(imagemin([
+      .pipe(gulpif(isProd, imagemin([
         imagemin.gifsicle({interlaced: true}),
         imagemin.mozjpeg({quality: 85, progressive: true}),
         imagemin.optipng({optimizationLevel: 5}),
@@ -150,7 +154,7 @@ function images() {
               {cleanupIDs: false}
           ]
         })
-      ]))
+      ])))
       .pipe(dest(path.build.img))
       .pipe(browsersync.stream())
 }
@@ -190,6 +194,11 @@ function svgSprites(params) {
       }
     }))
     .pipe(dest(path.build.svg))
+}
+
+function media(params) {
+  return src(path.src.media)
+  .pipe(dest(path.build.media))
 }
 
 function cb() {
@@ -262,17 +271,24 @@ function watchFiles(params) {
   gulp.watch([path.watch.svg], svgSprites);
   gulp.watch([path.watch.fonts], fonts);
   gulp.watch([path.watch.fonts], fontsStyle);
+  gulp.watch([path.watch.media], media)
+}
+
+const toProd = (done) => {
+  isProd = true;
+  done();
 }
 
 function clean(params) {
   return del(path.clean);
 }
 
-let dev2 = gulp.series(clean, gulp.parallel(html, js, fonts, images, svgSprites), fontsStyle, css);
+let dev2 = gulp.series(clean, gulp.parallel(html, js, fonts, images, svgSprites, media), fontsStyle, css);
 let dev = parallel(dev2, watchFiles, browserSync)
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts, svgSprites), fontsStyle);
-let watch = gulp.parallel(build, watchFiles, browserSync);
+let build = gulp.series(clean, gulp.parallel(toProd, js, html, images, fonts, svgSprites, media), fontsStyle, css);
+let watch = parallel(build, watchFiles, browserSync);
 
+exports.media = media;
 exports.svgSprites = svgSprites;
 exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
