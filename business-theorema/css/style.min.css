@@ -15,17 +15,17 @@
 }
 
 @font-face {
-  src: url("../fonts/Montserrat-SemiBold.woff") format("woff"), url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
-  font-family: "Montserrat";
-  font-weight: 600;
+  src: url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.woff2") format("woff2");
+  font-family: "OpenSans";
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  src: url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.woff2") format("woff2");
-  font-family: "OpenSans";
-  font-weight: 400;
+  src: url("../fonts/Montserrat-SemiBold.woff") format("woff"), url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
+  font-family: "Montserrat";
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -678,6 +678,7 @@ template {
 .main .nav {
   left: -15px;
   top: 10px;
+  width: 200px;
   height: calc(100% - 220px);
 }
 
@@ -685,7 +686,7 @@ template {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 200px;
+  width: 100%;
   height: 100%;
 }
 
@@ -765,7 +766,6 @@ template {
   padding-left: 95px;
   width: 100%;
   min-width: 0;
-  max-width: 570px;
 }
 
 .main-slider__left-content {
@@ -1057,6 +1057,7 @@ template {
 .main-slider__modal-services {
   display: none;
   padding: 15px 5px 0 0;
+  width: 100%;
 }
 
 .main-slider__modal-services.is-active {
@@ -1076,6 +1077,7 @@ template {
   border-top: 1px solid rgba(51, 51, 51, 0.2);
   min-height: 85px;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .main-slider__modal-item:not(:first-child) {
@@ -1199,6 +1201,7 @@ template {
   position: absolute;
   left: 2px;
   top: 98px;
+  z-index: 100;
   display: flex;
   align-items: center;
   font-family: "Montserrat", sans-serif;
@@ -1209,6 +1212,7 @@ template {
   text-transform: uppercase;
   opacity: 0;
   visibility: hidden;
+  transition: opacity 0.1s linear;
 }
 
 .nav-back__icon {
@@ -1218,6 +1222,11 @@ template {
   border-radius: 50%;
   width: 40px;
   height: 40px;
+}
+
+.nav-back.is-active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .arrow-back {
@@ -1262,10 +1271,11 @@ template {
 }
 
 .swiper-container {
+  display: block;
+  overflow: hidden;
   width: 100%;
   min-width: 0;
   max-width: 50%;
-  overflow: hidden;
 }
 
 .swiper-wrapper {
@@ -1275,17 +1285,23 @@ template {
 
 .main-slider__left {
   margin-top: 175px;
-  padding: 0;
+  padding: 0 30px 0 15px;
   justify-content: flex-start;
   align-items: center;
   opacity: 1;
-  max-width: fit-content;
+  max-width: -webkit-fill-available;
+  overflow: hidden;
 }
 
 .main-slider__left-content {
   padding: 0;
   width: 100%;
   min-width: 0;
+}
+
+.main-slider__left-content.is-active {
+  display: none;
+  animation: close-slider-modal 0.3s linear;
 }
 
 .nav {
@@ -1313,7 +1329,7 @@ template {
 }
 
 .main-slider__left-container {
-  margin: 0 0 0 90px;
+  margin: 0 0 0 60px;
   width: 75%;
   user-select: none;
 }

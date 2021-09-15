@@ -2,6 +2,7 @@ import './components/localStorage'
 import './vendor/swiper-second-try';
 import {modalsInit} from './vendor/modal';
 import {openModalSliders} from './vendor/slider-modal';
+import {closeSliderModal} from './vendor/slider-close'
 // import './vendor/swiper';
 import './components/form';
 import './components/form-mask';
@@ -9,7 +10,7 @@ import './components/search';
 import './components/footer-nav';
 import './components/autoplay';
 import './components/svg-animation';
-import {delayAnimation} from './components/animation-delay';
+import './components/animation-delay';
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -46,23 +47,20 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   })
 
+  document.addEventListener('keydown', function(e) {
+    if ($('.modal').hasClass('is-active')) {
+      if (e.code === 'Escape') {
+        $('.modal').removeClass('is-active');
+        $('.modal').find('[data-modal').removeClass('is-active');
+      }
+    }
+  })
   openModalSliders();
 
-  if ($('.modal').hasClass('is-active')) {
-    document.addEventListener('keypress:27', function() {
-      console.log('нажал esc')
-      $(this).removeClass('is-active')
-    })
-  }
+  const btnBack = document.querySelector('.nav-back')
 
-  const lastInterval = -1;
-
-  const recallBtn = document.querySelector('.main__recall'),
-        recallBtnText = recallBtn.querySelector('.main__recall-icon');
-
-  // recallBtn.addEventListener('onmouseover', delayAnimation);
-  recallBtn.addEventListener('onmouseout', clearInterval(lastInterval));
-
-  recallBtnText.ommouseover = delayAnimation;
-
-});
+  btnBack.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeSliderModal();
+  });
+})

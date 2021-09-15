@@ -3,7 +3,8 @@ import $ from 'jquery';
 export function openModalSliders() {
   const btnModalSlider = $('.open-modal-slider'),
   modalSlider = $('.main-slider__modal-services'),
-  activeClass = 'is-active';
+  activeClass = 'is-active',
+  btnBack = $('.nav-back');
 
   btnModalSlider.each(function() {
     const $this = $(this);
@@ -11,12 +12,11 @@ export function openModalSliders() {
     $this.on("click", function(e) {
       e.preventDefault();
       const $modalSlide = $this.closest('.main-slider__left').find('.main-slider__modal-services'),
-      $leftContent = $this.closest('main-slider__left');
+      $leftContent = $this.closest('.main-slider__left').find('.main-slider__left-content');
 
       $modalSlide.addClass(activeClass);
       $leftContent.addClass(activeClass);
+      btnBack.addClass(activeClass);
     })
   })
 }
-
-

@@ -1,9 +1,12 @@
 export function themeChange() {
   const currentSlide = document.querySelector('.swiper-slide-active'),
         currentSlideData = currentSlide.dataset.color,
+        currentSlideIndex = currentSlide.dataset.swiperSlideIndex,
         classText = 'theme-',
         svgNavLinks = document.querySelectorAll('.svg-nav__element'),
-        navLinks = document.querySelectorAll('.nav-item');
+        navLinks = document.querySelectorAll('.nav-item'),
+        leftContent = currentSlide.querySelector('.main-slider__left-content'),
+        leftContentModal = currentSlide.querySelector('.main-slider__modal-services');
 
   document.body.className = '';
   document.body.className = classText + currentSlideData;
@@ -16,6 +19,10 @@ export function themeChange() {
     }
   })
 
+  localStorage.setItem('indexSlide', currentSlideIndex)
+
+  localStorage.setItem('themeColor', currentSlideData)
+
   navLinks.forEach(link => {
     link.classList.remove('active-link');
 
@@ -23,4 +30,9 @@ export function themeChange() {
       link.classList.add('active-link')
     }
   })
+
+  if (leftContent.classList.contains('is-active') && leftContentModal.classList.contains('is-active')) {
+    leftContent.classList.remove('is-active');
+    leftContentModal.classList.remove('is-active');
+  }
 }

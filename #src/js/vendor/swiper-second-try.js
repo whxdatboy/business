@@ -1,13 +1,17 @@
 import { setActiveBullet } from '../components/slideLoaded';
 import {themeChange} from '../components/slideChange'
 
+const storageIndexSlide = `${localStorage.getItem('indexSlide')}`;
+
 let swiperText = new Swiper('.main-slider__swiper-text', {
   loop: true,
-  slidesPerView: 'auto',
+  // slidesPerView: 'auto',
   effect: 'fade',
   fadeEffect: {
     crossFade: true,
   },
+
+  initialSlide: storageIndexSlide,
 
   speed: 150,
   spaceBetween: 30,
@@ -15,6 +19,7 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   mousewheelControl: true,
   draggable: true,
   uniqueNavElements: true,
+  centeredSlides: true,
 
   pagination: {
     el: '.nav-list',
@@ -29,11 +34,11 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   },
 
   on: {
-    init: function(swiper) {
+    init: function() {
       setActiveBullet()
     },
 
-    slideChangeTransitionStart: function(swiper) {
+    slideChangeTransitionStart: function() {
       themeChange();
     }
   }
