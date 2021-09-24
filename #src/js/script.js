@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const body = document;
 
+  let progress = document.querySelector('.progress-line');
+  progress.classList.add('animaton')
+
   let modalsItem = $('.modal-menu__item');
 
   modalsItem.each(function () {

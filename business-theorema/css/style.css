@@ -15,17 +15,17 @@
 }
 
 @font-face {
-  src: url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.woff2") format("woff2");
-  font-family: "OpenSans";
-  font-weight: 400;
+  src: url("../fonts/Montserrat-SemiBold.woff") format("woff"), url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
+  font-family: "Montserrat";
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  src: url("../fonts/Montserrat-SemiBold.woff") format("woff"), url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
-  font-family: "Montserrat";
-  font-weight: 600;
+  src: url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.woff2") format("woff2");
+  font-family: "OpenSans";
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -1041,6 +1041,9 @@ template {
   width: 0;
   height: 100%;
   background-color: var(--color-main);
+}
+
+.progress-line.animation {
   animation: progress 12000ms linear;
 }
 
@@ -1049,14 +1052,18 @@ template {
     width: 0%;
   }
 
-  100% {
+  99% {
     width: 100%;
+  }
+
+  100% {
+    width: 0%;
   }
 }
 
 .main-slider__modal-services {
   display: none;
-  padding: 15px 5px 0 0;
+  padding: 35px 5px 0 0;
   width: 100%;
 }
 

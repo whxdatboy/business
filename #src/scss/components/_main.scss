@@ -370,7 +370,10 @@
     width: 0;
     height: 100%;
     background-color: var(--color-main);
-    animation: progress 12000ms linear;
+
+    &.animation {
+      animation: progress 12000ms linear;
+    }
   }
 }
 
@@ -379,8 +382,12 @@
     width: 0%;
   }
 
-  100% {
+  99% {
     width: 100%;
+  }
+
+  100% {
+    width: 0%;
   }
 }
 
@@ -389,7 +396,7 @@
 .main-slider__modal {
   &-services {
     display: none;
-    padding: 15px 5px 0 0;
+    padding: 35px 5px 0 0;
     width: 100%;
 
     &.is-active {
@@ -692,11 +699,7 @@
 }
 
 .svg-ellipse {
-  // stroke: var(--color-theme);
   stroke-width: 3;
-  // stroke-dasharray: 420, 0;
-  // stroke-dashoffset: 200;
-  // stroke-dasharray: 420, 10;
 }
 
 @keyframes animate-1 {

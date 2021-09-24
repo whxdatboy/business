@@ -1,5 +1,7 @@
 import { setActiveBullet } from '../components/slideLoaded';
-import {themeChange} from '../components/slideChange'
+import { themeChange } from '../components/slideChange';
+import { countChange, countMax } from '../components/slide-count';
+import { restartAnimation } from '../components/animation-restart'
 
 const storageIndexSlide = `${localStorage.getItem('indexSlide')}`;
 
@@ -9,6 +11,13 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   effect: 'fade',
   fadeEffect: {
     crossFade: true,
+  },
+
+  watchOverflow: true,
+
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
   },
 
   initialSlide: storageIndexSlide,
@@ -36,11 +45,17 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   on: {
     init: function() {
       setActiveBullet()
+      countMax()
     },
 
     slideChangeTransitionStart: function() {
       themeChange();
-    }
+    },
+
+    transitionStart: function() {
+      countChange();
+      restartAnimation();
+    },
   }
 
 });
@@ -80,3 +95,20 @@ let swiperImg = new Swiper('.main-slider__swiper-img', {
 
 swiperText.controller.control = swiperImg;
 swiperImg.controller.control = swiperText;
+
+let btns = document.querySelectorAll('.btns')
+
+btns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    let modal = document.querySelector('.modal');
+
+    if (!modal.classList.contains('is-active')) {
+      swiperText.autoplay.stop();
+      console.log('autoplay stoped')
+    } else {
+      swiperText.autoplay.start()
+      console.log('autoplay started')
+    }
+
+  })
+})
