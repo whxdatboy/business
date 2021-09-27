@@ -3,6 +3,7 @@ import { themeChange } from '../components/slideChange';
 import { countChange, countMax } from '../components/slide-count';
 import { restartAnimation } from '../components/animation-restart';
 import { getThemeColor } from "../components/localStorage";
+import { cssNumber } from 'jquery';
 
 const indexSlide = localStorage.getItem('indexSlide');
 console.log("storage index " + indexSlide)
@@ -18,6 +19,8 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   fadeEffect: {
     crossFade: true,
   },
+
+  initialSlide: +`${localStorage.getItem('indexSlide')}`,
 
   watchOverflow: true,
 
@@ -47,7 +50,11 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   },
 
   on: {
-    beforeInit: function() {
+    beforeInit: function(swiper) {
+
+      let slideIndex = localStorage.getItem('slideIndex')
+      console.log("init: " + swiper.initialSlide)
+      swiper.initialSlide = slideIndex;
       getThemeColor();
     },
 
@@ -69,8 +76,6 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
 });
 
 swiperText.on('init', function(swiper) {
-  let slideIndex = localStorage.getItem('slideIndex')
-  swiper.initialSlide = slideIndex;
 })
 
 let swiperImg = new Swiper('.main-slider__swiper-img', {
