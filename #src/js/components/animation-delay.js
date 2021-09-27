@@ -4,7 +4,6 @@ const recallBtn = document.querySelector('.main__recall'),
       recallBtnText = recallBtn.querySelector('.main__recall-icon');
 
 function delayAnimation(el) {
-  console.log("animka doing")
   clearInterval(lastInterval);
   let style = getComputedStyle(el),
       step = 0.01;

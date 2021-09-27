@@ -54,11 +54,17 @@ img {
 a {
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 a:hover {
-  opacity: 0.75;
+  color: var(--color-theme);
+}
+
+a:hover::before,
+a:hover::after,
+a:hover .header__menu-line {
+  background-color: var(--color-theme);
 }
 
 ul {
@@ -545,7 +551,7 @@ template {
 }
 
 .header__logo-img {
-  width: 53px;
+  width: 55px;
   height: 55px;
 }
 
@@ -579,6 +585,10 @@ template {
   cursor: pointer;
 }
 
+.header__search-btn:hover .header__search-icon {
+  fill: var(--color-theme);
+}
+
 .header__search-text {
   font-weight: 700;
   font-size: 14px;
@@ -595,6 +605,8 @@ template {
 .header__search-icon {
   width: 100%;
   height: 100%;
+  fill: var(--color-main);
+  transition: fill 0.3s ease;
 }
 
 .header__phone {
@@ -638,6 +650,7 @@ template {
   width: 28px;
   height: 2px;
   background-color: var(--color-main);
+  transition: background-color 0.3s ease;
 }
 
 .header__menu-desc {
@@ -828,6 +841,10 @@ template {
   margin-right: 15px;
 }
 
+.main-btns .btn-full:hover {
+  color: #fff;
+}
+
 .main__recall {
   position: absolute;
   left: 0;
@@ -920,6 +937,7 @@ template {
 }
 
 .btn:hover {
+  color: var(--color-main);
   opacity: 0.75;
 }
 
@@ -981,7 +999,7 @@ template {
 }
 
 .main-socials__link:hover {
-  opacity: 0.75;
+  background-color: var(--color-theme);
 }
 
 .main-socials__icon {
@@ -997,6 +1015,7 @@ template {
   display: flex;
   flex-shrink: 0;
   align-items: center;
+  margin-left: 100px;
   max-width: 180px;
 }
 

@@ -5,11 +5,5 @@ export function setActiveBullet() {
             slideTheme = localStorage.getItem('themeColor'),
             classTheme = 'theme-';
 
-    const navSvgLink = document.getElementById(`${slideAttr}`);
-
-    document.body.classList.add(classTheme + slideAttr);
-
-    navSvgLink.classList.add('active-link')
-
-    return;
+    document.body.classList.add(classTheme + slideTheme);
 }

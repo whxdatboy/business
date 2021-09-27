@@ -1,12 +1,7 @@
 export function countMax() {
-  let slidesCount = 0,
-      slides = document.querySelectorAll('.main-slider__left:not(.swiper-slide-duplicate)');
+  let slides = document.querySelectorAll('.main-slider__left:not(.swiper-slide-duplicate)');
 
-  for (let i = 0; i - 1 < slides.length; i++) {
-    slidesCount = i;
-  }
-
-  document.querySelector('.pagination-max').innerText = `0${slidesCount}`;
+  document.querySelector('.pagination-max').innerText = `0${slides.length}`;
 }
 
 export function countChange() {

@@ -8,7 +8,6 @@ import './components/form';
 import './components/form-mask';
 import './components/search';
 import './components/footer-nav';
-import './components/autoplay';
 import './components/svg-animation';
 import './components/animation-delay';
 

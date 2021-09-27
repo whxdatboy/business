@@ -1,9 +1,15 @@
 import { setActiveBullet } from '../components/slideLoaded';
 import { themeChange } from '../components/slideChange';
 import { countChange, countMax } from '../components/slide-count';
-import { restartAnimation } from '../components/animation-restart'
+import { restartAnimation } from '../components/animation-restart';
+import { getThemeColor } from "../components/localStorage";
 
-const storageIndexSlide = `${localStorage.getItem('indexSlide')}`;
+const indexSlide = localStorage.getItem('indexSlide');
+console.log("storage index " + indexSlide)
+
+let timeSpend = 0,
+    timeDelay = 12000 - timeSpend,
+    timePause;
 
 let swiperText = new Swiper('.main-slider__swiper-text', {
   loop: true,
@@ -16,11 +22,9 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   watchOverflow: true,
 
   autoplay: {
-    delay: 2000,
+    delay: timeDelay,
     disableOnInteraction: false,
   },
-
-  initialSlide: storageIndexSlide,
 
   speed: 150,
   spaceBetween: 30,
@@ -43,9 +47,13 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   },
 
   on: {
+    beforeInit: function() {
+      getThemeColor();
+    },
+
     init: function() {
-      setActiveBullet()
-      countMax()
+      setActiveBullet();
+      countMax();
     },
 
     slideChangeTransitionStart: function() {
@@ -59,6 +67,11 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   }
 
 });
+
+swiperText.on('init', function(swiper) {
+  let slideIndex = localStorage.getItem('slideIndex')
+  swiper.initialSlide = slideIndex;
+})
 
 let swiperImg = new Swiper('.main-slider__swiper-img', {
   slidesPerView: 'auto',
@@ -96,19 +109,23 @@ let swiperImg = new Swiper('.main-slider__swiper-img', {
 swiperText.controller.control = swiperImg;
 swiperImg.controller.control = swiperText;
 
-let btns = document.querySelectorAll('.btns')
+let btns = document.querySelectorAll('.btns');
 
 btns.forEach(btn => {
   btn.addEventListener('click', function() {
-    let modal = document.querySelector('.modal');
+    let modal = document.querySelector('.modal'),
+        timeStop;
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
-      console.log('autoplay stoped')
+      setPauseOnAutoplay()
+      timeStop = new Date();
+
     } else {
       swiperText.autoplay.start()
-      console.log('autoplay started')
+      restartAnimation();
     }
-
   })
 })
+
+
