@@ -1,7 +1,7 @@
 'use strict';
 
 let project_folder = require("path").basename(__dirname);
-let source_folder = "#src";
+let source_folder = "_src";
 
 let fs = require('fs');
 
@@ -23,6 +23,7 @@ let path = {
     fonts: source_folder + "/fonts/*.ttf",
     svg: source_folder + "/iconsprite/*.svg",
     media: source_folder + "/media/*.{mp4,ogv,avi,webm,mov}",
+    jsMap: source_folder + "/js/**/*.js.map",
   },
   watch: {
     html: source_folder + "/**/*.html",
@@ -36,18 +37,18 @@ let path = {
   clean: "./" + project_folder + "/"
 }
 
-let isProd = false;
+let isProd = false,
+    webpackMode = 'development',
+    sourceMapWebpack = 'source-map';
 
 let { src, dest, parallel } = require('gulp'),
   gulp = require('gulp'),
   browsersync = require("browser-sync").create(),
   fileinclude = require("gulp-file-include"),
   del = require("del"),
-  scss = require("gulp-sass"),
+  scss = require('gulp-sass')(require('sass')),
   autoprefixer = require("gulp-autoprefixer"),
-  group_media = require("gulp-group-css-media-queries"),
   clean_css = require("gulp-clean-css"),
-  rename = require("gulp-rename"),
   uglify = require("gulp-uglify-es").default,
   imagemin = require("gulp-imagemin"),
   svgSprite = require("gulp-svg-sprite"),
@@ -58,14 +59,17 @@ let { src, dest, parallel } = require('gulp'),
   webpackStream = require("webpack-stream"),
   sourcemaps = require('gulp-sourcemaps'),
   notify = require('gulp-notify'),
-  gulpif = require('gulp-if');
+  gulpif = require('gulp-if'),
+  filter = require('gulp-filter'),
+  UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 function browserSync(params) {
   browsersync.init({
       server: {
         baseDir: "./" + project_folder + "/",
       },
-      port: 3000,
+      index: 'index.html',
+      port: 3030,
       notify: false,
   })
   watchFiles();
@@ -83,36 +87,29 @@ function html() {
 
 function css() {
   return src(path.src.css)
-      .pipe((gulpif(!isProd, sourcemaps.init())))
-      .pipe(
-        scss({
+      .pipe(gulpif(!isProd, sourcemaps.init()))
+      .pipe(scss({
             outputStyle: 'expanded'
-        })
-      )
+        }).on('error', notify.onError()))
       .pipe(
-        group_media())
-      .pipe(gulpif(isProd,
         autoprefixer({
             overrideBrowserslist: ["last 10 versions"],
-            cascade: true
-        })
-      ))
-      .pipe(gulpif(!isProd, sourcemaps.write('.')))
-      .pipe(dest(path.build.css))
-      .pipe(gulpif(isProd, clean_css()))
-      .pipe(
-        rename({
-            extname: ".min.css"
+            cascade: false,
         })
       )
+      .pipe(clean_css())
+      .pipe(gulpif(isProd, scss({
+        outputStyle: 'compressed'
+      })))
+      .pipe(gulpif(!isProd, sourcemaps.write('.')))
       .pipe(dest(path.build.css))
       .pipe(browsersync.stream({match: '**/*.css'}))
 }
 
 function js() {
   return src(path.src.js)
-  .pipe(gulpif(!isProd, sourcemaps.init()))
     .pipe(webpackStream({
+      mode: webpackMode,
       output: {
         filename: 'script.js',
       },
@@ -131,11 +128,19 @@ function js() {
             }
           }
         ]
-      }
-    }))
-    .pipe(dest(path.build.js))
-    .pipe(gulpif(isProd, uglify().on("error", notify.onError())))
-    .pipe(gulpif(!isProd, sourcemaps.write('.')))
+      },
+      devtool: 'source-map',
+      optimization: {
+        minimize: isProd,
+        minimizer: [
+          new UglifyJsPlugin({
+            test: /\.js(\?.*)?$/i,
+            parallel: true,
+            extractComments: true,
+          })
+        ]
+      },
+    }, webpack))
     .pipe(dest(path.build.js))
     .pipe(browsersync.stream())
 }
@@ -144,7 +149,7 @@ function images() {
   return src(path.src.img)
       .pipe(dest(path.build.img))
       .pipe(src(path.src.img))
-      .pipe(gulpif(isProd, imagemin([
+      .pipe(imagemin([
         imagemin.gifsicle({interlaced: true}),
         imagemin.mozjpeg({quality: 85, progressive: true}),
         imagemin.optipng({optimizationLevel: 5}),
@@ -154,7 +159,7 @@ function images() {
               {cleanupIDs: false}
           ]
         })
-      ])))
+      ]))
       .pipe(dest(path.build.img))
       .pipe(browsersync.stream())
 }
@@ -205,7 +210,7 @@ function cb() {
 
 }
 
-function fontsStyle() {
+async function fontsStyle() {
   let file_content = fs.readFileSync(source_folder + '/scss/_fonts.scss');
 
   if (!file_content == '') {
@@ -220,7 +225,7 @@ function fontsStyle() {
           let weight = checkWeight(fontname);
 
           if (c_fontname != fontname) {
-            fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font-face("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
+            fs.appendFile(source_folder + '/scss/_fonts.scss', '@include font("' + font + '", "' + fontname + '", ' + weight + ', "normal");\r\n', cb);
           }
           c_fontname = fontname;
         }
@@ -276,6 +281,8 @@ function watchFiles(params) {
 
 const toProd = (done) => {
   isProd = true;
+  webpackMode = 'production';
+  sourceMapWebpack = 'false';
   done();
 }
 
@@ -285,8 +292,8 @@ function clean(params) {
 
 let dev2 = gulp.series(clean, gulp.parallel(html, js, fonts, images, svgSprites, media), fontsStyle, css);
 let dev = parallel(dev2, watchFiles, browserSync)
-let build = gulp.series(clean, gulp.parallel(toProd, js, html, images, fonts, svgSprites, media), fontsStyle, css);
-let watch = parallel(build, watchFiles, browserSync);
+let build = gulp.series(clean, gulp.parallel(toProd, html, js, fonts, images, svgSprites, media), fontsStyle, css);
+let watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.media = media;
 exports.svgSprites = svgSprites;

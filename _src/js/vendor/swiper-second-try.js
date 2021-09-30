@@ -5,13 +5,6 @@ import { restartAnimation } from '../components/animation-restart';
 import { getThemeColor } from "../components/localStorage";
 import { cssNumber } from 'jquery';
 
-const indexSlide = localStorage.getItem('indexSlide');
-console.log("storage index " + indexSlide)
-
-let timeSpend = 0,
-    timeDelay = 12000 - timeSpend,
-    timePause;
-
 let swiperText = new Swiper('.main-slider__swiper-text', {
   loop: true,
   // slidesPerView: 'auto',
@@ -25,7 +18,7 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   watchOverflow: true,
 
   autoplay: {
-    delay: timeDelay,
+    delay: 12000,
     disableOnInteraction: false,
   },
 
@@ -50,11 +43,7 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
   },
 
   on: {
-    beforeInit: function(swiper) {
-
-      let slideIndex = localStorage.getItem('slideIndex')
-      console.log("init: " + swiper.initialSlide)
-      swiper.initialSlide = slideIndex;
+    beforeInit: function() {
       getThemeColor();
     },
 
@@ -63,20 +52,22 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
       countMax();
     },
 
-    slideChangeTransitionStart: function() {
-      themeChange();
+    slideChangeTransitionEnd: function() {
+      countChange();
     },
 
-    transitionStart: function() {
-      countChange();
+    slideChangeTransitionStart: function() {
+      themeChange();
       restartAnimation();
     },
+
+    slideChange: function(swiper) {
+      swiper.autoplay.stop();
+      swiper.autoplay.start();
+    }
   }
 
 });
-
-swiperText.on('init', function(swiper) {
-})
 
 let swiperImg = new Swiper('.main-slider__swiper-img', {
   slidesPerView: 'auto',

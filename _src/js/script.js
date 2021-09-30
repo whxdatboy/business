@@ -22,11 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   modalsItem.each(function () {
     $(this).click(function() {
-      $(this).find('.modal-menu__desc').slideDown(300);
+      $(this).find('.modal-menu__desc').addClass('desc-active');
     });
 
     $(this).mouseleave(function() {
-      $('.modal-menu__desc').slideUp(300);
+      $('.modal-menu__desc').removeClass('desc-active');
     });
   });
 

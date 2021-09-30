@@ -62,51 +62,56 @@
 
           <div class="main-slider__modal-services" data-modal-slider="erp">
 
-            <ul class="main-slider__modal-list">
+            <div class="main-slider__modal-container">
 
-              <li class="main-slider__modal-item">
-                <div class="main-slider__modal-wrapper">
-                  <h3 class="main-slider__modal-title">Производство <span class="arrow"></span></h3>
-                  <p class="main-slider__modal-desc">Затраты, Себестоимость</p>
-                </div>
-              </li>
+              <ul class="main-slider__modal-list">
 
-              <li class="main-slider__modal-item">
-                <div class="main-slider__modal-wrapper">
-                  <h3 class="main-slider__modal-title">Финансы <span class="arrow"></span></h3>
-                  <p class="main-slider__modal-desc">Бюджетирвоание, Казначейство, РСБУ</p>
-                </div>
-              </li>
+                <li class="main-slider__modal-item">
+                  <div class="main-slider__modal-wrapper">
+                    <h3 class="main-slider__modal-title">Производство <span class="arrow"></span></h3>
+                    <p class="main-slider__modal-desc">Затраты, Себестоимость</p>
+                  </div>
+                </li>
 
-              <li class="main-slider__modal-item">
-                <div class="main-slider__modal-wrapper">
-                  <h3 class="main-slider__modal-title">Управленческий учет в ERP <span class="arrow"></span></h3>
-                  <p class="main-slider__modal-desc"></p>
-                </div>
-              </li>
+                <li class="main-slider__modal-item">
+                  <div class="main-slider__modal-wrapper">
+                    <h3 class="main-slider__modal-title">Финансы <span class="arrow"></span></h3>
+                    <p class="main-slider__modal-desc">Бюджетирвоание, Казначейство, РСБУ</p>
+                  </div>
+                </li>
 
-              <li class="main-slider__modal-item">
-                <div class="main-slider__modal-wrapper">
-                  <h3 class="main-slider__modal-title">Продажи и CRM <span class="arrow"></span></h3>
-                  <p class="main-slider__modal-desc"></p>
-                </div>
-              </li>
+                <li class="main-slider__modal-item">
+                  <div class="main-slider__modal-wrapper">
+                    <h3 class="main-slider__modal-title">Управленческий учет в ERP <span class="arrow"></span></h3>
+                    <p class="main-slider__modal-desc"></p>
+                  </div>
+                </li>
 
-              <li class="main-slider__modal-item">
-                <div class="main-slider__modal-wrapper">
-                  <h3 class="main-slider__modal-title">Логистика, Закупки и склад <span class="arrow"></span></h3>
-                  <p class="main-slider__modal-desc"></p>
-                </div>
-              </li>
+                <li class="main-slider__modal-item">
+                  <div class="main-slider__modal-wrapper">
+                    <h3 class="main-slider__modal-title">Продажи и CRM <span class="arrow"></span></h3>
+                    <p class="main-slider__modal-desc"></p>
+                  </div>
+                </li>
 
-              <li class="main-slider__modal-item">
-                <div class="main-slider__modal-wrapper">
-                  <h3 class="main-slider__modal-title">Все блоки автоматизации <span class="arrow"></span></h3>
-                  <p class="main-slider__modal-desc"></p>
-                </div>
-              </li>
+                <li class="main-slider__modal-item">
+                  <div class="main-slider__modal-wrapper">
+                    <h3 class="main-slider__modal-title">Логистика, Закупки и склад <span class="arrow"></span></h3>
+                    <p class="main-slider__modal-desc"></p>
+                  </div>
+                </li>
 
-            </ul>
+                <li class="main-slider__modal-item">
+                  <div class="main-slider__modal-wrapper">
+                    <h3 class="main-slider__modal-title">Все блоки автоматизации <span class="arrow"></span></h3>
+                    <p class="main-slider__modal-desc"></p>
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+
+
 
           </div>
 
@@ -417,16 +422,14 @@
 
             <path class="svg-ellipse"
               d="M138.393 97.8642C192.548 56.2466 260.348 31.5049 333.926 31.5049C407.505 31.5049 475.305 56.2466 529.46 97.8642" />
-            </path>
-
-            <path d="M360.074 32.5602C350.557 32.2176 314.48 31.8524 304.979 32.502" stroke="#F0F0F0" stroke-width="9"
-              class="svg-invisible" />
-
 
             <a class="svg-link" href="#">
-              <circle class="big-circle" cx="333.532" cy="32.3165" r="14.233" stroke="#3F4245" stroke-opacity="0.3" />
-
-              <circle class="big-circle-inside" cx="333.53162" cy="32.31629" r="7.99793" fill="#FF4D4D" />
+              <g>
+                <path d="M360.074 32.5602C350.557 32.2176 314.48 31.8524 304.979 32.502" stroke="#F0F0F0" stroke-width="9"
+                class="svg-invisible" />
+                <circle class="big-circle" cx="333.532" cy="32.3165" r="14.233" stroke="#3F4245" stroke-opacity="0.3" />
+                <circle class="big-circle-inside" cx="333.53162" cy="32.31629" r="7.99793" />
+              </g>
             </a>
 
           </g>
@@ -436,13 +439,14 @@
             <path class="svg-ellipse"
               d="M524.259 93.8344C579.319 134.247 621.974 192.466 642.478 263.13C662.982 333.794 658.114 405.803 633.236 469.411" />
 
-            <path d="M648.346 282.603C645.796 273.428 635.236 238.928 631.744 230.068" stroke="#F0F0F0" stroke-width="9"
-              class="svg-invisible" />
-
             <a class="svg-link" href="#">
-              <circle class="big-circle" cx="640.006" cy="256.696" r="14.233" transform="rotate(-90 640.006 256.696)"
+              <g>
+                <path d="M648.346 282.603C645.796 273.428 635.236 238.928 631.744 230.068" stroke="#F0F0F0" stroke-width="9"
+                class="svg-invisible" />
+                <circle class="big-circle" cx="640.006" cy="256.696" r="14.233" transform="rotate(-90 640.006 256.696)"
                 stroke="#BBBCBD" />
-              <circle class="big-circle-inside" cx="640.006" cy="256.696" r="7.99793" fill="#0085FF" />
+                <circle class="big-circle-inside" cx="640.006" cy="256.696" r="7.99793" />
+              </g>
             </a>
 
           </g>
@@ -452,12 +456,14 @@
             <path class="svg-ellipse"
               d="M640.853 445.771C620.994 511.119 580.222 570.672 520.361 613.457C460.5 656.241 390.954 675.536 322.696 673.168" />
 
-            <path d="M506.679 623.517C514.443 618.003 543.308 596.357 550.455 590.065" stroke="#F0F0F0" stroke-width="9"
-              class="svg-invisible" />
 
             <a class="svg-link" href="#">
-              <circle class="big-circle" cx="529.017" cy="606.412" r="14.233" stroke="#BBBCBD" />
-              <circle class="big-circle-inside" cx="529.017" cy="606.412" r="7.99793" fill="#4BC357" />
+              <g>
+                <path d="M506.679 623.517C514.443 618.003 543.308 596.357 550.455 590.065" stroke="#F0F0F0" stroke-width="9"
+                  class="svg-invisible" />
+                  <circle class="big-circle" cx="529.017" cy="606.412" r="14.233" stroke="#BBBCBD" />
+                  <circle class="big-circle-inside" cx="529.017" cy="606.412" r="7.99793" />
+              </g>
             </a>
 
           </g>
@@ -468,12 +474,14 @@
               d="M349.199 673.249C280.91 672.049 212.467 649.147 154.922 603.294C97.3784 557.442 59.7723 495.84 43.354 429.543"
               transform="translate(-20, 0)" />
 
-            <path d="M117.836 588.379C125.142 594.487 153.411 616.905 161.313 622.22" stroke="#F0F0F0"
-              stroke-width="8" />
 
             <a class="svg-link" href="#">
-              <circle class="big-circle" cx="138.467" cy="606.412" r="14.233" stroke="#BBBCBD" />
-              <circle class="big-circle-inside" cx="138.467" cy="606.412" r="7.99793" fill="#FFBF1C" />
+              <g>
+                <path d="M117.836 588.379C125.142 594.487 153.411 616.905 161.313 622.22" stroke="#F0F0F0"
+                  stroke-width="8" />
+                <circle class="big-circle" cx="138.467" cy="606.412" r="14.233" stroke="#BBBCBD" />
+                <circle class="big-circle-inside" cx="138.467" cy="606.412" r="7.99793"  />
+              </g>
             </a>
 
           </g>
@@ -483,12 +491,14 @@
               d="M65.6513 468.131C41.0446 404.419 36.4832 332.39 57.2877 261.814C78.0923 191.238 120.995 133.2 176.227 93.0227"
               transform="translate(-30, 0)" />
 
-            <path d="M37.7936 230.442C34.6341 239.425 23.5477 273.76 21.3402 283.023" stroke="#F0F0F0"
-              stroke-width="4" />
 
             <a class="svg-link" href="#">
-              <circle class="big-circle" cx="28.5265" cy="256.696" r="14.233" stroke="#BBBCBD" />
-              <circle class="big-circle-inside" cx="28.5265" cy="256.696" r="7.99793" fill="#AA4EF2" />
+              <g>
+                <path d="M37.7936 230.442C34.6341 239.425 23.5477 273.76 21.3402 283.023" stroke="#F0F0F0"
+                  stroke-width="4" />
+                <circle class="big-circle" cx="28.5265" cy="256.696" r="14.233" stroke="#BBBCBD" />
+                <circle class="big-circle-inside" cx="28.5265" cy="256.696" r="7.99793" />
+              </g>
             </a>
 
           </g>

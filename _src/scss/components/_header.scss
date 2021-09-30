@@ -21,6 +21,10 @@
     width: 26%;
   }
 
+  &__information {
+    display: flex;
+  }
+
   &__logo {
     display: flex;
 
@@ -56,7 +60,7 @@
 
   &__search {
     &-btn {
-      display: block;
+      display: flex;
       padding-top: 5px;
       cursor: pointer;
 
@@ -68,14 +72,15 @@
     }
 
     &-text {
+      margin-left: 15px;
       font-weight: 700;
       font-size: 14px;
-      line-height: 14px;
+      line-height: 18px;
       text-transform: uppercase;
     }
 
     &-logo {
-      display: inline-block;
+      display: block;
       width: 15px;
       height: 15px;
     }
@@ -114,11 +119,12 @@
 
   &__menu {
     display: flex;
-    padding: 8px 0 0 40px;
+    padding: 8px 0 0;
     cursor: pointer;
 
     &-icon {
       position: relative;
+      margin-right: 15px;
       max-height: 18px;
     }
 
@@ -138,27 +144,59 @@
       line-height: 18px;
       text-transform: uppercase;
     }
+
+    &:hover {
+      .small-line {
+        &:first-child,
+        &:last-child {
+          &::before {
+            width: 0;
+          }
+        }
+      }
+    }
   }
 
   .big-line {
-    left: -30%;
-    top: 50%;
     width: 28px;
-    transform: translate(-120%, -50%);
+    transform: translate(0%, 300%);
   }
 
   .small-line {
-    width: 14px;
+    position: relative;
+    display: block;
+    width: 28px;
 
     &:first-child {
-      left: -30%;
-      top: 5%;
-      transform: translate(-240%, 50%);
+      top: 0;
+      transform: translate(0%, 100%);
+
+      &::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background-color: var(--color-main-bg);
+        transition: width 0.3s ease;
+      }
     }
 
     &:last-child {
-      top: 70%;
-      transform: translate(-140% ,50%);
+      bottom: 0;
+      transform: translate(0%, 600%);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background-color: var(--color-main-bg);
+        transition: width 0.3s ease;
+      }
     }
   }
 }
