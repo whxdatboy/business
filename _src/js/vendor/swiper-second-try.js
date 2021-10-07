@@ -13,13 +13,13 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
     crossFade: true,
   },
 
-  initialSlide: +`${localStorage.getItem('indexSlide')}`,
+  initialSlide: +`${localStorage.getItem('indexSlide')}` > 0? +`${localStorage.getItem('indexSlide')}` : 0,
 
   watchOverflow: true,
 
   autoplay: {
     delay: 12000,
-    disableOnInteraction: false,
+    disableOnInteraction: true,
   },
 
   speed: 150,

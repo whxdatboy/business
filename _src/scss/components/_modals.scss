@@ -82,7 +82,7 @@
     width: 45px;
     height: 45px;
     background-color: transparent;
-    transition: opacity 0.3s;
+    transition: border 0.3s ease;
     cursor: pointer;
 
     span {
@@ -99,6 +99,7 @@
         width: 21px;
         height: 2px;
         background-color: var(--color-main);
+        transition: background 0.3s ease;
       }
 
       &::before {
@@ -111,7 +112,14 @@
     }
 
     &:hover {
-      opacity: 0.75;
+      border: 2px solid var(--color-theme);
+
+      span {
+        &::before,
+        &::after {
+          background: var(--color-theme);
+        }
+      }
     }
   }
 }
@@ -199,16 +207,6 @@
     font-size: 18px;
     line-height: 21px;
     color: var(--color-main);
-
-    &:hover .modal-menu__desc-link::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-bottom: 1px solid var(--color-main);
-      transition: all 0.3s;
-    }
   }
 
   &-link {
@@ -246,7 +244,7 @@
 .modal-recall {
   .modal-title {
     position: relative;
-    margin: 18px 0 2px;;
+    margin: 18px 0 2px;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-size: 75px;
@@ -294,7 +292,7 @@
 
       input {
         display: block;
-        outline: 1px solid transparent;
+        outline: none;
         border: none;
         border-bottom: 1px solid var(--color-input-border);
         width: 100%;
@@ -308,12 +306,18 @@
           font-size: 22px;
           line-height: 35px;
           color: var(--color-input);
+          transition: transform 0.4s linear, border 0.2s ease;
         }
 
-        &:active,
         &:focus,
+        &:active,
         &:target {
-          outline: 2px solid rgb(95, 95, 95);
+          outline: transparent;
+          border-bottom: 2px solid var(--color-theme);
+
+          &::placeholder {
+            transform: translate(-100%, 0);
+          }
         }
       }
 
@@ -329,6 +333,22 @@
           line-height: 28px;
           color: var(--color-input);
           background-color: var(--color-main-bg);
+          resize: none;
+
+          &::placeholder {
+            transition: transform 0.2s ease;
+          }
+
+          &:focus,
+          &:active,
+          &:target {
+            outline: transparent;
+            border-bottom: 2px solid var(--color-theme);
+
+            &::placeholder {
+              transform: translate(-100%, 0);
+            }
+          }
         }
       }
 
@@ -437,5 +457,15 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .modal {
+    overflow-y: auto;
+
+    &-container {
+      padding: 100px 70px 0;
+    }
   }
 }

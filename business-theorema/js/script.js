@@ -327,33 +327,7 @@ linksWrap.addEventListener('click', function (e) {
   \*******************************************/
 /***/ (() => {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var theme = /*#__PURE__*/function () {
-  function theme() {
-    _classCallCheck(this, theme);
-  }
-
-  _createClass(theme, [{
-    key: "construcor",
-    value: function construcor(slide, color) {
-      this.color = color;
-      this.slide = slide;
-    }
-  }, {
-    key: "saySlideAndColor",
-    value: function saySlideAndColor() {
-      console.log(this.color);
-      console.log(this.slide);
-    }
-  }]);
-
-  return theme;
-}();
 
 /***/ }),
 
@@ -737,11 +711,11 @@ var swiperText = new Swiper('.main-slider__swiper-text', {
   fadeEffect: {
     crossFade: true
   },
-  initialSlide: +"".concat(localStorage.getItem('indexSlide')),
+  initialSlide: +"".concat(localStorage.getItem('indexSlide')) > 0 ? +"".concat(localStorage.getItem('indexSlide')) : 0,
   watchOverflow: true,
   autoplay: {
     delay: 12000,
-    disableOnInteraction: false
+    disableOnInteraction: true
   },
   speed: 150,
   spaceBetween: 30,
