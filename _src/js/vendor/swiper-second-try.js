@@ -7,7 +7,6 @@ import { cssNumber } from 'jquery';
 
 let swiperText = new Swiper('.main-slider__swiper-text', {
   loop: true,
-  // slidesPerView: 'auto',
   effect: 'fade',
   fadeEffect: {
     crossFade: true,
@@ -15,20 +14,16 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
 
   initialSlide: +`${localStorage.getItem('indexSlide')}` > 0? +`${localStorage.getItem('indexSlide')}` : 0,
 
-  watchOverflow: true,
-
   autoplay: {
     delay: 12000,
     disableOnInteraction: true,
   },
 
   speed: 150,
-  spaceBetween: 30,
 
   mousewheelControl: true,
   draggable: true,
   uniqueNavElements: true,
-  centeredSlides: true,
 
   pagination: {
     el: '.nav-list',
@@ -36,6 +31,18 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
     clickable: true,
     bulletClass: 'nav-item',
     bulletActiveClass: 'active-link',
+  },
+
+  breakpoints: {
+    320: {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    },
+    1023: {
+
+    }
   },
 
   mousewheel: {
@@ -70,7 +77,6 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
 });
 
 let swiperImg = new Swiper('.main-slider__swiper-img', {
-  slidesPerView: 'auto',
   loop: true,
   effect: 'fade',
   fadeEffect: {

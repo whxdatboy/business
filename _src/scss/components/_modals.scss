@@ -469,3 +469,57 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .modal {
+    &-container {
+      padding: 0;
+    }
+
+    &-header {
+      left: 10px;
+      top: 10px;
+    }
+
+    &-close {
+      right: 10px;
+      top: 10px;
+    }
+
+    &-menu {
+      &__container {
+        padding-top: 83px;
+      }
+
+      &__item {
+        padding-left: 22px;
+
+        .modal-menu__link {
+          font-size: 26px;
+          line-height: 31px;
+        }
+      }
+
+      &__desc {
+        margin-left: -45px;
+
+        &-content {
+          margin-right: 40px;
+        }
+
+        &.desc-active .flex-jc-sb {
+          height: 310px;
+        }
+      }
+    }
+  }
+
+  .modal--menu {
+    background: none;
+  }
+
+  .flex-jc-sb {
+    display: -webkit-box;
+    overflow-x: auto;
+  }
+}

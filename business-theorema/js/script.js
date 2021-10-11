@@ -66,6 +66,19 @@ function bulletChange() {}
 
 /***/ }),
 
+/***/ "./_src/js/components/change-vh.js":
+/*!*****************************************!*\
+  !*** ./_src/js/components/change-vh.js ***!
+  \*****************************************/
+/***/ (() => {
+
+if (window.innerWidth < 1440) {
+  var vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
+}
+
+/***/ }),
+
 /***/ "./_src/js/components/footer-nav.js":
 /*!******************************************!*\
   !*** ./_src/js/components/footer-nav.js ***!
@@ -706,29 +719,34 @@ __webpack_require__.r(__webpack_exports__);
 
 var swiperText = new Swiper('.main-slider__swiper-text', {
   loop: true,
-  // slidesPerView: 'auto',
   effect: 'fade',
   fadeEffect: {
     crossFade: true
   },
   initialSlide: +"".concat(localStorage.getItem('indexSlide')) > 0 ? +"".concat(localStorage.getItem('indexSlide')) : 0,
-  watchOverflow: true,
   autoplay: {
     delay: 12000,
     disableOnInteraction: true
   },
   speed: 150,
-  spaceBetween: 30,
   mousewheelControl: true,
   draggable: true,
   uniqueNavElements: true,
-  centeredSlides: true,
   pagination: {
     el: '.nav-list',
     type: 'custom',
     clickable: true,
     bulletClass: 'nav-item',
     bulletActiveClass: 'active-link'
+  },
+  breakpoints: {
+    320: {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    },
+    1023: {}
   },
   mousewheel: {
     thresholdDelta: 100
@@ -755,7 +773,6 @@ var swiperText = new Swiper('.main-slider__swiper-text', {
   }
 });
 var swiperImg = new Swiper('.main-slider__swiper-img', {
-  slidesPerView: 'auto',
   loop: true,
   effect: 'fade',
   fadeEffect: {
@@ -11939,6 +11956,7 @@ return jQuery;
 /******/ 	__webpack_require__("./_src/js/components/animation-delay.js");
 /******/ 	__webpack_require__("./_src/js/components/animation-restart.js");
 /******/ 	__webpack_require__("./_src/js/components/bulletChange.js");
+/******/ 	__webpack_require__("./_src/js/components/change-vh.js");
 /******/ 	__webpack_require__("./_src/js/components/footer-nav.js");
 /******/ 	__webpack_require__("./_src/js/components/form-mask.js");
 /******/ 	__webpack_require__("./_src/js/components/form.js");
