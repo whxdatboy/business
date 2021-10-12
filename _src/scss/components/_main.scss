@@ -14,12 +14,12 @@
 
     &:first-child {
       stroke-dasharray: 17%;
-      transform: translate(40%, -50%);
+      transform: translate(40%, -70%);
     }
 
     &:nth-child(2) {
       stroke-dasharray: 30%;
-      transform: translate(15%, -50%);
+      transform: translate(15%, -70%);
     }
   }
 
@@ -379,23 +379,6 @@
     font-size: 16px;
     line-height: 22px;
   }
-
-  progress {
-    appearance: none;
-    margin: 0 15px;
-    border: none;
-    width: 86px;
-    height: 2px;
-    box-sizing: border-box;
-
-    &::-webkit-progress-bar {
-      background-color: #d9d9da;
-    }
-
-    &::-webkit-progress-value {
-      background-color: var(--color-main);
-    }
-  }
 }
 
 .progress {
@@ -411,27 +394,32 @@
     left: 0;
     top: 0;
     display: block;
-    width: 0;
+    width: 100%;
     height: 100%;
     background-color: var(--color-main);
+    transform: scaleX(0);
+    transform-origin: left;
+    // transition: transform 12000ms linear;
 
     &.animation {
       animation: progress 12000ms linear;
+      // max-width: 86px;
+      // transform: scaleX(1);
     }
   }
 }
 
 @keyframes progress {
   0% {
-    width: 0%;
+    transform: scaleX(0);
   }
 
   99% {
-    width: 100%;
+    transform: scaleX(1);
   }
 
   100% {
-    width: 0%;
+    transform: scaleX(0);
   }
 }
 
