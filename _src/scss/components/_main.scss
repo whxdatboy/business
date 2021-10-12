@@ -399,12 +399,9 @@
     background-color: var(--color-main);
     transform: scaleX(0);
     transform-origin: left;
-    // transition: transform 12000ms linear;
 
     &.animation {
       animation: progress 12000ms linear;
-      // max-width: 86px;
-      // transform: scaleX(1);
     }
   }
 }
