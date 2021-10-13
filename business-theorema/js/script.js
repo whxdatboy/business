@@ -723,6 +723,7 @@ var swiperText = new Swiper('.main-slider__swiper-text', {
   fadeEffect: {
     crossFade: true
   },
+  runCallbacksOnInit: true,
   initialSlide: +"".concat(localStorage.getItem('indexSlide')) > 0 ? +"".concat(localStorage.getItem('indexSlide')) : 0,
   autoplay: {
     delay: 12000,
@@ -808,8 +809,6 @@ btns.forEach(function (btn) {
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
-      setPauseOnAutoplay();
-      timeStop = new Date();
     } else {
       swiperText.autoplay.start();
       (0,_components_animation_restart__WEBPACK_IMPORTED_MODULE_3__.restartAnimation)();

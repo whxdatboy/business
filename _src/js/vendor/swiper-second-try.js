@@ -12,7 +12,8 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
     crossFade: true,
   },
 
-  initialSlide: +`${localStorage.getItem('indexSlide')}` > 0? +`${localStorage.getItem('indexSlide')}` : 0,
+  runCallbacksOnInit: true,
+  initialSlide: +`${localStorage.getItem('indexSlide')}` > 0 ? +`${localStorage.getItem('indexSlide')}` : 0,
 
   autoplay: {
     delay: 12000,
@@ -120,8 +121,6 @@ btns.forEach(btn => {
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
-      setPauseOnAutoplay()
-      timeStop = new Date();
 
     } else {
       swiperText.autoplay.start()
