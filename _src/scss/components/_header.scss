@@ -240,7 +240,9 @@
 
 @media screen and (max-width: 1024px) {
   .header {
-    background-color: var(--color-main-bg);
+    z-index: 3;
+    background: var(--color-main-bg);
+
     &__phone {
       margin-left: 30px;
     }

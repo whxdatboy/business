@@ -115,13 +115,11 @@ let btns = document.querySelectorAll('.btns');
 
 btns.forEach(btn => {
   btn.addEventListener('click', function() {
-    let modal = document.querySelector('.modal'),
-        timeStop;
+    let modal = document.querySelector('.modal');
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
       setPauseOnAutoplay()
-      timeStop = new Date();
 
     } else {
       swiperText.autoplay.start()

@@ -72,7 +72,7 @@ function bulletChange() {}
   \*****************************************/
 /***/ (() => {
 
-if (window.innerWidth < 1440) {
+if (window.innerWidth < 768) {
   var vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
 }
@@ -154,11 +154,11 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log(jquery__WEBPACK_IMPORTED_MODULE_0___default()('.modal-form__label').find('input[type="checkbox"]'));
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.modal-form__label').on('click', function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '.modal-form__label', function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('input[type="checkbox"]:checked')) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.modal-form__submit-container button').attr('disabled', false);
     } else {
-      return;
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.modal-form__submit-container button').attr('disabled', true);
     }
   });
 });
@@ -299,21 +299,6 @@ function setActiveBullet() {
       classTheme = 'theme-';
   document.body.classList.add(classTheme + slideTheme);
 }
-
-/***/ }),
-
-/***/ "./_src/js/components/storage.js":
-/*!***************************************!*\
-  !*** ./_src/js/components/storage.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createStorage": () => (/* binding */ createStorage)
-/* harmony export */ });
-function createStorage() {}
 
 /***/ }),
 
@@ -803,13 +788,11 @@ swiperImg.controller.control = swiperText;
 var btns = document.querySelectorAll('.btns');
 btns.forEach(function (btn) {
   btn.addEventListener('click', function () {
-    var modal = document.querySelector('.modal'),
-        timeStop;
+    var modal = document.querySelector('.modal');
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
       setPauseOnAutoplay();
-      timeStop = new Date();
     } else {
       swiperText.autoplay.start();
       (0,_components_animation_restart__WEBPACK_IMPORTED_MODULE_3__.restartAnimation)();
@@ -11965,7 +11948,6 @@ return jQuery;
 /******/ 	__webpack_require__("./_src/js/components/slide-count.js");
 /******/ 	__webpack_require__("./_src/js/components/slideChange.js");
 /******/ 	__webpack_require__("./_src/js/components/slideLoaded.js");
-/******/ 	__webpack_require__("./_src/js/components/storage.js");
 /******/ 	__webpack_require__("./_src/js/components/svg-animation.js");
 /******/ 	__webpack_require__("./_src/js/components/theme-color.js");
 /******/ 	__webpack_require__("./_src/js/vendor/modal.js");
