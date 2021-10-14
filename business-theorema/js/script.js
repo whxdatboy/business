@@ -793,10 +793,6 @@ btns.forEach(function (btn) {
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
-<<<<<<< HEAD
-=======
-      setPauseOnAutoplay();
->>>>>>> 01b4a6bc68152e61ffe5c2fcbf704e6342f1ff52
     } else {
       swiperText.autoplay.start();
       (0,_components_animation_restart__WEBPACK_IMPORTED_MODULE_3__.restartAnimation)();

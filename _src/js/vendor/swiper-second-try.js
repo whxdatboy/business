@@ -120,11 +120,6 @@ btns.forEach(btn => {
 
     if (!modal.classList.contains('is-active')) {
       swiperText.autoplay.stop();
-<<<<<<< HEAD
-=======
-      setPauseOnAutoplay()
->>>>>>> 01b4a6bc68152e61ffe5c2fcbf704e6342f1ff52
-
     } else {
       swiperText.autoplay.start()
       restartAnimation();
