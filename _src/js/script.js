@@ -21,11 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let modalsItem = $('.modal-menu__item');
 
   modalsItem.each(function () {
-    $(this).click(function() {
+    $(this).on('click', function() {
+      console.log(`нажал на ${$(this)}`)
       $(this).find('.modal-menu__desc').addClass('desc-active');
     });
 
-    $(this).mouseleave(function() {
+    $(this).on('mouseleave', function() {
       $('.modal-menu__desc').removeClass('desc-active');
     });
   });
@@ -64,5 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
   btnBack.addEventListener('click', function(e) {
     e.preventDefault();
     closeSliderModal();
+
+    if ($(window).width() < 768) {
+      $('nav').css('height', '0')
+      $('.main-footer').css('display', 'flex');
+    }
   });
 })

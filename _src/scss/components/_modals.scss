@@ -497,7 +497,7 @@
 @media screen and (max-width: 767px) {
   .modal {
     &-container {
-      padding: 0;
+      // padding: 0;
     }
 
     &-header {
@@ -539,6 +539,7 @@
   }
 
   .modal--menu {
+    padding: 0 10px;
     background: none;
   }
 

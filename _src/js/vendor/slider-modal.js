@@ -17,6 +17,11 @@ export function openModalSliders() {
       $modalSlide.addClass(activeClass);
       $leftContent.addClass(activeClass);
       btnBack.addClass(activeClass);
+
+      if ($(window).width() < 768) {
+        btnBack.closest('nav').css('height', '45px')
+        $('.main-footer').css('display', 'none');
+      }
     })
   })
 }
