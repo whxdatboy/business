@@ -6,7 +6,8 @@ export function themeChange() {
         svgNavLinks = document.querySelectorAll('.svg-nav__element'),
         navLinks = document.querySelectorAll('.nav-item'),
         leftContent = currentSlide.querySelector('.main-slider__left-content'),
-        leftContentModal = currentSlide.querySelector('.main-slider__modal-services');
+        leftContentModal = currentSlide.querySelector('.main-slider__modal-services'),
+        navBack = document.querySelector('.nav-back');
 
   document.body.className = '';
   document.body.className = classText + currentSlideData;
@@ -22,6 +23,8 @@ export function themeChange() {
   localStorage.setItem('indexSlide', currentSlideIndex)
 
   localStorage.setItem('themeColor', currentSlideData)
+
+  navBack.classList.remove('is-active')
 
   navLinks.forEach(link => {
     link.classList.remove('active-link');

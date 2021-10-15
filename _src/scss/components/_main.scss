@@ -1070,7 +1070,6 @@
 
     &-slider__wrapper {
       flex-direction: column;
-      padding-bottom: 50px;
       height: 100%;
     }
 
@@ -1094,7 +1093,7 @@
     }
 
     &-slider__img-wrapper {
-      max-width: 80%;
+      max-width: 70%;
     }
   }
 
@@ -1207,9 +1206,11 @@
 
     &-slider {
       display: block;
-      // flex-direction: column;
-      // align-items: flex-start;
       height: calc(100% - 76px);
+
+      &__wrapper {
+        padding-bottom: 50px;
+      }
     }
 
     &-slider__left {

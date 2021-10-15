@@ -72,7 +72,7 @@ function bulletChange() {}
   \*****************************************/
 /***/ (() => {
 
-if (window.innerWidth < 768) {
+if (window.innerWidth <= 1024) {
   var vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
 }
@@ -252,7 +252,8 @@ function themeChange() {
       svgNavLinks = document.querySelectorAll('.svg-nav__element'),
       navLinks = document.querySelectorAll('.nav-item'),
       leftContent = currentSlide.querySelector('.main-slider__left-content'),
-      leftContentModal = currentSlide.querySelector('.main-slider__modal-services');
+      leftContentModal = currentSlide.querySelector('.main-slider__modal-services'),
+      navBack = document.querySelector('.nav-back');
   document.body.className = '';
   document.body.className = classText + currentSlideData;
   svgNavLinks.forEach(function (link) {
@@ -264,6 +265,7 @@ function themeChange() {
   });
   localStorage.setItem('indexSlide', currentSlideIndex);
   localStorage.setItem('themeColor', currentSlideData);
+  navBack.classList.remove('is-active');
   navLinks.forEach(function (link) {
     link.classList.remove('active-link');
 
