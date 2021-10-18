@@ -84,6 +84,9 @@ window.addEventListener('resize', function () {
       document.querySelector('.slider__img').style.display = 'flex';
       document.querySelector('.main-footer').style.position = 'static';
     }
+  } else {
+    document.querySelector('.slider__img').style.display = 'block';
+    document.querySelector('.main-footer').style.position = 'absolute';
   }
 });
 
@@ -737,7 +740,7 @@ var swiperText = new Swiper('.main-slider__swiper-text', {
     delay: 12000,
     disableOnInteraction: true
   },
-  speed: 150,
+  speed: 200,
   mousewheelControl: true,
   draggable: true,
   uniqueNavElements: true,

@@ -10,5 +10,8 @@ if (window.innerWidth <= 1024) {
       document.querySelector('.slider__img').style.display = 'flex';
       document.querySelector('.main-footer').style.position = 'static';
     }
+  } else {
+    document.querySelector('.slider__img').style.display = 'block';
+    document.querySelector('.main-footer').style.position = 'absolute'
   }
 })

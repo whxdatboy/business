@@ -20,7 +20,7 @@ let swiperText = new Swiper('.main-slider__swiper-text', {
     disableOnInteraction: true,
   },
 
-  speed: 150,
+  speed: 200,
 
   mousewheelControl: true,
   draggable: true,
