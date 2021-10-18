@@ -3,9 +3,7 @@ import './vendor/swiper-second-try';
 import {modalsInit} from './vendor/modal';
 import {openModalSliders} from './vendor/slider-modal';
 import {closeSliderModal} from './vendor/slider-close'
-// import './vendor/swiper';
 import './components/form';
-import './components/form-mask';
 import './components/search';
 import './components/footer-nav';
 import './components/svg-animation';

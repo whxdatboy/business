@@ -51,21 +51,6 @@ function restartAnimation() {
 
 /***/ }),
 
-/***/ "./_src/js/components/bulletChange.js":
-/*!********************************************!*\
-  !*** ./_src/js/components/bulletChange.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "bulletChange": () => (/* binding */ bulletChange)
-/* harmony export */ });
-function bulletChange() {}
-
-/***/ }),
-
 /***/ "./_src/js/components/change-vh.js":
 /*!*****************************************!*\
   !*** ./_src/js/components/change-vh.js ***!
@@ -116,41 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
-/***/ }),
-
-/***/ "./_src/js/components/form-mask.js":
-/*!*****************************************!*\
-  !*** ./_src/js/components/form-mask.js ***!
-  \*****************************************/
-/***/ (() => {
-
-// import $ from 'jquery';
-// document.addEventListener('DOMContentLoaded', function() {
-//   const form = $('.modal-form'),
-//         regName = /^[А-ЯЁа-яё]*(\s[А-ЯЁа-яё]*){2}$/i,
-//         regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z0-9]$/i,
-//         regTel = /^\+7\s\d{3}\s\d{3}-\d{2}-\d{2}$/;
-//         let isChecked = false;
-//         form.addEventListener("submit", async(e) => {
-//           e.preventDefault();
-//           const formData = new FormData(form);
-//           const validName = regName.text(formData.get("recall-name")),
-//                 validCompName = regName.text(formData.get("recall-company")),
-//                 validTel = regTel.text(formData.get("recall-phone")),
-//                 validEmail = regEmail.text(formData.get("recall-email"))
-//                 if (!validEmail || !validName || !validCompName || !validTel) {
-//                   alert(`
-//                     ${!validName ? "Введите корректное имя\r\n" : ""}
-//                     ${!validCompName ? "Введите корректное название компании\r\n" : ""}
-//                     ${!validTel ? "Введите корректный номер телефона\r\n" : ""}
-//                     ${!validEmail ? "Введите корректный адрес\r\n" : ""}
-//                   `);
-//                   return;
-//                 }
-//         }
-//         )
-// })
 
 /***/ }),
 
@@ -334,16 +284,6 @@ linksWrap.addEventListener('click', function (e) {
 
 /***/ }),
 
-/***/ "./_src/js/components/theme-color.js":
-/*!*******************************************!*\
-  !*** ./_src/js/components/theme-color.js ***!
-  \*******************************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ "./_src/js/script.js":
 /*!***************************!*\
   !*** ./_src/js/script.js ***!
@@ -358,19 +298,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vendor_slider_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./vendor/slider-modal */ "./_src/js/vendor/slider-modal.js");
 /* harmony import */ var _vendor_slider_close__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./vendor/slider-close */ "./_src/js/vendor/slider-close.js");
 /* harmony import */ var _components_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/form */ "./_src/js/components/form.js");
-/* harmony import */ var _components_form_mask__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/form-mask */ "./_src/js/components/form-mask.js");
-/* harmony import */ var _components_form_mask__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_form_mask__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/search */ "./_src/js/components/search.js");
-/* harmony import */ var _components_footer_nav__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/footer-nav */ "./_src/js/components/footer-nav.js");
-/* harmony import */ var _components_svg_animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/svg-animation */ "./_src/js/components/svg-animation.js");
-/* harmony import */ var _components_svg_animation__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_svg_animation__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _components_animation_delay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/animation-delay */ "./_src/js/components/animation-delay.js");
-/* harmony import */ var _components_animation_delay__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_components_animation_delay__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _components_search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/search */ "./_src/js/components/search.js");
+/* harmony import */ var _components_footer_nav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/footer-nav */ "./_src/js/components/footer-nav.js");
+/* harmony import */ var _components_svg_animation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/svg-animation */ "./_src/js/components/svg-animation.js");
+/* harmony import */ var _components_svg_animation__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_svg_animation__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_animation_delay__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/animation-delay */ "./_src/js/components/animation-delay.js");
+/* harmony import */ var _components_animation_delay__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_animation_delay__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
-
- // import './vendor/swiper';
 
 
 
@@ -11964,10 +11900,8 @@ return jQuery;
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./_src/js/components/animation-delay.js");
 /******/ 	__webpack_require__("./_src/js/components/animation-restart.js");
-/******/ 	__webpack_require__("./_src/js/components/bulletChange.js");
 /******/ 	__webpack_require__("./_src/js/components/change-vh.js");
 /******/ 	__webpack_require__("./_src/js/components/footer-nav.js");
-/******/ 	__webpack_require__("./_src/js/components/form-mask.js");
 /******/ 	__webpack_require__("./_src/js/components/form.js");
 /******/ 	__webpack_require__("./_src/js/components/localStorage.js");
 /******/ 	__webpack_require__("./_src/js/components/search.js");
@@ -11975,7 +11909,6 @@ return jQuery;
 /******/ 	__webpack_require__("./_src/js/components/slideChange.js");
 /******/ 	__webpack_require__("./_src/js/components/slideLoaded.js");
 /******/ 	__webpack_require__("./_src/js/components/svg-animation.js");
-/******/ 	__webpack_require__("./_src/js/components/theme-color.js");
 /******/ 	__webpack_require__("./_src/js/vendor/modal.js");
 /******/ 	__webpack_require__("./_src/js/vendor/slider-close.js");
 /******/ 	__webpack_require__("./_src/js/vendor/slider-modal.js");
