@@ -1,8 +1,4 @@
 .main {
-  &-title {
-    margin: 0 auto 10px;
-  }
-
   .nav {
     position: static;
     width: 100%;
@@ -174,6 +170,8 @@
 
 @media screen and (max-width: 767px) {
   .main {
+    overflow: hidden;
+
     .nav {
       position: absolute;
       left: 0;
@@ -215,7 +213,9 @@
   }
 
   .slider {
+    align-items: flex-start;
     margin-top: 20px;
+    height: 100%;
 
     &__wrapper {
       padding-top: 0;
@@ -233,7 +233,7 @@
   }
 
   .main-slider__modal-services {
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
   .main-slider__swiper-text {
