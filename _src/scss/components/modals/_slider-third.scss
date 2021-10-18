@@ -105,8 +105,7 @@
 
     &__wrapper {
       flex-direction: column;
-      padding-top: 90px;
-      height: 100%;
+      height: initial;
     }
 
     &__text {
@@ -140,6 +139,10 @@
       left: initial;
       top: initial;
       height: initial;
+
+      &-back {
+        top: -50px;
+      }
     }
   }
 
@@ -216,6 +219,7 @@
 
     &__wrapper {
       padding-top: 0;
+      height: 100%;
     }
 
     &__text {
