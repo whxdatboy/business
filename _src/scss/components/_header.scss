@@ -24,6 +24,9 @@
 
   &__information {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 450px;
   }
 
   &__logo {
@@ -92,30 +95,6 @@
       fill: var(--color-main);
       transition: fill 0.3s ease;
     }
-  }
-
-  &__phone {
-    margin-left: 145px;
-  }
-
-  &__mail {
-    margin-left: 75px;
-  }
-
-  &__left,
-  &__right {
-    display: flex;
-    font-family: "Montserrat", sans-serif;
-    font-size: 18px;
-    line-height: 22px;
-    color: var(--color-main);
-  }
-
-  &__phone,
-  &__mail {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 35px;
   }
 
   &__menu {
@@ -200,6 +179,24 @@
       }
     }
   }
+
+  &__left,
+  &__right {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--color-main);
+  }
+
+  &__phone,
+  &__mail {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 35px;
+  }
 }
 
 @media screen and (max-width: 1820px) {
@@ -221,16 +218,21 @@
         }
       }
     }
+
+    &__information {
+      flex-flow: wrap;
+      max-width: 60%;
+
+      div {
+        max-height: 17px;
+      }
+    }
   }
 
   .header__phone,
   .header__mail {
     font-size: 13px;
     line-height: 30px;
-  }
-
-  .header__phone {
-    margin-left: 120px;
   }
 
   .header__right {
@@ -243,14 +245,6 @@
     z-index: 3;
     background: var(--color-main-bg);
 
-    &__phone {
-      margin-left: 30px;
-    }
-
-    &__mail {
-      margin-left: 30px;
-    }
-
     &__right {
       max-width: 140px;
     }
@@ -258,11 +252,28 @@
     &__search-text {
       display: none;
     }
+
+    &__information {
+      flex-direction: column;
+      justify-content: center;
+      max-width: 200px;
+
+      div {
+        align-self: flex-start;
+        max-height: 20px;
+      }
+    }
+
+    &__mail,
+    &__phone {
+      line-height: 1;
+    }
   }
 }
 
 @media screen and (max-width: 767px) {
   .header {
+    position: static;
     background-color: var(--color-main-bg);
 
     .container {
@@ -295,11 +306,13 @@
     }
 
     &__information {
-      flex-wrap: wrap;
+      flex-flow: wrap;
+      flex-direction: row;
       justify-content: space-between;
       order: 3;
       margin-top: 15px;
       width: 100%;
+      max-width: 100%;
     }
 
     &__phone {

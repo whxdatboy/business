@@ -2,7 +2,6 @@ import $ from 'jquery';
 
 export function openModalSliders() {
   const btnModalSlider = $('.open-modal-slider'),
-  modalSlider = $('.main-slider__modal-services'),
   activeClass = 'is-active',
   btnBack = $('.nav-back');
 

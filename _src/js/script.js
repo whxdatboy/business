@@ -1,44 +1,29 @@
+import './vendor/modal';
 import './components/localStorage'
-import './vendor/swiper-second-try';
-import {modalsInit} from './vendor/modal';
+import './vendor/swiper';
 import {openModalSliders} from './vendor/slider-modal';
 import {closeSliderModal} from './vendor/slider-close'
 import './components/form';
 import './components/search';
-import './components/footer-nav';
 import './components/svg-animation';
 import './components/animation-delay';
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  const body = document;
-
   let progress = document.querySelector('.progress-line');
   progress.classList.add('animaton')
 
   let modalsItem = $('.modal-menu__item');
 
   modalsItem.each(function () {
-    $(this).on('click', function() {
-      console.log(`нажал на ${$(this)}`)
-      $(this).find('.modal-menu__desc').addClass('desc-active');
-    });
+    $(this).on('click', function(e) {
+      e.preventDefault();
 
-    $(this).on('mouseleave', function() {
-      $('.modal-menu__desc').removeClass('desc-active');
+      let $desc = $(this).find('.modal-menu__desc');
+      $desc.toggleClass('desc-active');
     });
   });
 
-  const btnHeader = $('.header__menu'),
-  btnCloseModal = $('.modal-close'),
-  btnRecall = $('.main__recall');
-
-
-  // btnHeader.click(function(e) {
-  //   e.preventDefault();
-  //   $('.modal').addClass('is-active'),
-  //   $('.modal--menu').addClass('is-active');
-  // })
+  const btnCloseModal = $('.modal-close');
 
   btnCloseModal.each(function() {
     $(this).click(function(e) {

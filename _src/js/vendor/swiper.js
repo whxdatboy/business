@@ -1,146 +1,140 @@
-// let indexSlide = localStorage.getItem('indexSlide');
+import { setActiveBullet } from '../components/slideLoaded';
+import { themeChange } from '../components/slideChange';
+import { countChange, countMax } from '../components/slide-count';
+import { restartAnimation } from '../components/animation-restart';
+import { getThemeColor } from "../components/localStorage";
+import { cssNumber } from 'jquery';
 
-// export const swiperMain = new Swiper('.main-slider', {
-//   loop: true,
-//   effect: 'fade',
-//   slidesPerView: 1,
-//   autoplay: {
-//     delay: 2000,
-//     disableOnInteraction: false,
-//   },
-//   draggable: true,
-//   mousewheelControl: true,
-//   simulateTouch: false,
-//   setWrapperSize: false,
-//   initialSlide: indexSlide,
+let swiperText = new Swiper('.main-slider__swiper-text', {
+  loop: true,
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true,
+  },
 
-//   fadeEffect: {
-//     crossFade: true,
-//   },
+  runCallbacksOnInit: true,
+  initialSlide: +`${localStorage.getItem('indexSlide')}` > 0 ? +`${localStorage.getItem('indexSlide')}` : 0,
 
-//   uniqueNavElements: true,
+  autoplay: {
+    delay: 12000,
+    disableOnInteraction: false,
+  },
 
-  // pagination: {
-  //   el: '.nav-list',
-  //   type: 'custom',
-  //   clickable: true,
-  //   bulletClass: 'nav-item',
-  //   bulletActiveClass: 'nav-item-active',
-  // },
+  speed: 200,
 
-//   mousewheel: {
-//     thresholdDelta: 1,
-//   },
+  mousewheelControl: true,
+  draggable: true,
+  uniqueNavElements: true,
 
-//   on: {
-//     init: function() {
-//       let slides = document.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)'),
-//       mainProgressMax = document.querySelector('.pagination-max'),
-//       count = 0;
+  pagination: {
+    el: '.nav-list',
+    type: 'custom',
+    clickable: true,
+    bulletClass: 'nav-item',
+    bulletActiveClass: 'active-link',
+  },
 
-//       slides.forEach(slide => {
-//         count += 1;
-//       });
+  breakpoints: {
+    320: {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    },
+    1023: {
 
-//       mainProgressMax.innerText = `0${count}`;
-//     },
+    }
+  },
 
-//     slideChangeTransitionStart: function () {
+  mousewheel: {
+    thresholdDelta: 100,
+  },
 
-//       let root = document.documentElement,
-//       currentSlide = document.querySelector('.swiper-slide-active'),
-//       countCurrent = 1,
-//       slides = document.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)'),
-//       arrSlides = Array.from(slides),
-//       mainProgress = document.querySelector('progress'),
-//       mainProgressCount = document.querySelector('.pagination-count');
+  on: {
+    beforeInit: function() {
+      getThemeColor();
+    },
 
-//       switch(currentSlide.dataset.color) {
-//         case 'red':
-//           document.body.className = '';
-//           document.body.classList.add('theme-red');
-//           countCurrent = 1;
-//           localStorage.setItem('themeColor', 'red');
-//           localStorage.setItem('indexSlide', 0);
-//           break;
+    init: function() {
+      setActiveBullet();
+      countMax();
+    },
 
-//         case 'blue':
-//           document.body.className = '';
-//           document.body.classList.add('theme-blue');
-//           countCurrent = 2;
-//           localStorage.setItem('themeColor', 'blue');
-//           localStorage.setItem('indexSlide', 1);
-//           break;
+    slideChangeTransitionEnd: function() {
+      countChange();
+    },
 
-//         case 'green':
-//           document.body.className = '';
-//           document.body.classList.add('theme-green');
-//           countCurrent = 3;
-//           localStorage.setItem('themeColor', 'green');
-//           localStorage.setItem('indexSlide', 2);
-//           break;
+    slideChangeTransitionStart: function() {
+      themeChange();
+      restartAnimation();
+    },
 
-//         case 'yellow':
-//           document.body.className = '';
-//           document.body.classList.add('theme-yellow');
-//           countCurrent = 4;
-//           localStorage.setItem('themeColor', 'yellow');
-//           localStorage.setItem('indexSlide', 3);
-//           break;
+    slideChange: function(swiper) {
+      swiper.autoplay.stop();
+      swiper.autoplay.start();
+    }
+  }
 
-//         case 'purple':
-//           document.body.className = '';
-//           document.body.classList.add('theme-purple');
-//           countCurrent = 5;
-//           localStorage.setItem('themeColor', 'purple');
-//           localStorage.setItem('indexSlide', 4);
-//           break;
+});
 
-//         default:
-//           break;
-//       }
+let swiperImg = new Swiper('.main-slider__swiper-img', {
+  loop: true,
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true,
+  },
 
-//       // mainProgress.value = countCurrent;
-//       mainProgressCount.innerText = `0${countCurrent}`;
-//     },
+  speed: 150,
 
-//     beforeTransitionStart: function () {
-//       const $currentSlide = $('.swiper-slide-active');
-//       $currentSlide.find('.main-slider__left-content').removeClass('is-active');
-//       $currentSlide.find('.main-slider__modal-services').removeClass('is-active');
-//     },
+  mousewheelControl: true,
+  draggable: true,
+  uniqueNavElements: true,
 
-//     observerMutation: function () {
-//       let btnOpenModal = document.querySelectorAll('.open-modal'),
-//         btnCloseModal = document.querySelectorAll('.close-modal'),
-//         modal = document.querySelector('.modal');
+  mousewheel: {
+    thresholdDelta: 100,
+  },
 
-//       if (modal.length > 0 && modal.classList.contains('is-active')) {
-//         autoplay.stop()
-//         stopAutoPlay();
-//       } else {
-//         autoplay.start()
-//         startAutoPlay();
-//       }
+  pagination: {
+    el: '.main-slider__swiper-pagination',
+    type: 'custom',
+    clickable: true,
+    bulletClass: 'svg-nav__element',
+    bulletActiveClass: 'active-link',
+  },
 
+  on: {
+    beforeInit: function() {
+      document.querySelector('.slider__wrapper').classList.add('slider-before-init')
+      document.querySelector('.slider__wrapper').style.opacity = 0;
+    },
 
-//       btnOpenModal.forEach(btn => {
-//         btn.addEventListener('click', function() {
-//           swiperMain.autoplay.stop();
-//           swiperMain.stopAutoPlay();
-//           swiperMain.autoplay.delay = 999999999999;
-//         })
-//       })
+    afterInit: function() {
+      document.querySelector('.slider__wrapper').classList.remove('slider-before-init')
+      document.querySelector('.slider__wrapper').style.opacity = 1;
+    },
 
-//       btnCloseModal.forEach(btn => {
-//         btn.addEventListener('click', function() {
-//           swiperMain.autoplay.start();
-//           swiperMain.startAutoPlay();
-//           swiperMain.autoplay.delay = 12000;
-//         })
-//     })
-//     }
-//   }
+    slideChangeTransitionStart: function(swiper) {
+      themeChange();
+    }
+  }
+})
+
+swiperText.controller.control = swiperImg;
+swiperImg.controller.control = swiperText;
+
+let btns = document.querySelectorAll('.btns');
+
+btns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    let modal = document.querySelector('.modal');
+
+    if (!modal.classList.contains('is-active')) {
+      swiperText.autoplay.stop();
+    } else {
+      swiperText.autoplay.start()
+      restartAnimation();
+    }
+  })
+})
 
 
-// });
