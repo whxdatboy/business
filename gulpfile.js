@@ -193,9 +193,12 @@ function svgSprites(params) {
     ]))
     .pipe(svgSprite({
       mode: {
-        stack: {
-          sprite: "../icons.svg"
-        }
+        symbol: {
+          sprite: "../icons.svg",
+        },
+        // stack: {
+        //
+        //
       }
     }))
     .pipe(dest(path.build.svg))
